@@ -1,0 +1,1879 @@
+{
+	"entries": [
+		{
+			"fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+			"name": "Initial position",
+			"moves": [
+				{
+					"uci": "e2e4",
+					"weight": 44,
+					"name": "King's Pawn Opening"
+				},
+				{
+					"uci": "d2d4",
+					"weight": 34,
+					"name": "Queen's Pawn Opening"
+				},
+				{
+					"uci": "c2c4",
+					"weight": 12,
+					"name": "English Opening"
+				},
+				{
+					"uci": "g1f3",
+					"weight": 10,
+					"name": "Zukertort Opening"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1",
+			"name": "After 1.e4 - King's Pawn Opening",
+			"moves": [
+				{
+					"uci": "c7c5",
+					"weight": 34,
+					"name": "Sicilian Defense"
+				},
+				{
+					"uci": "e7e5",
+					"weight": 31,
+					"name": "Open Game"
+				},
+				{
+					"uci": "e7e6",
+					"weight": 14,
+					"name": "French Defense"
+				},
+				{
+					"uci": "c7c6",
+					"weight": 8,
+					"name": "Caro-Kann Defense"
+				},
+				{
+					"uci": "d7d5",
+					"weight": 6,
+					"name": "Scandinavian Defense"
+				},
+				{
+					"uci": "d7d6",
+					"weight": 4,
+					"name": "Pirc Defense"
+				},
+				{
+					"uci": "g8f6",
+					"weight": 3,
+					"name": "Alekhine Defense"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/ppp1pppp/8/3p4/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+			"name": "Scandinavian Defense",
+			"moves": [
+				{
+					"uci": "e4d5",
+					"weight": 78,
+					"name": "Main Line"
+				},
+				{
+					"uci": "b1c3",
+					"weight": 14,
+					"name": "Modern Variation"
+				},
+				{
+					"uci": "e4e5",
+					"weight": 8,
+					"name": "Advance Variation"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2",
+			"name": "King's Pawn Game",
+			"moves": [
+				{
+					"uci": "g1f3",
+					"weight": 57,
+					"name": "King Knight Opening"
+				},
+				{
+					"uci": "f1c4",
+					"weight": 24,
+					"name": "Italian Game"
+				},
+				{
+					"uci": "f1b5",
+					"weight": 19,
+					"name": "Ruy Lopez"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq e6 1 2",
+			"name": "King's Knight Opening",
+			"moves": [
+				{
+					"uci": "b8c6",
+					"weight": 49,
+					"name": "Three Knights Game"
+				},
+				{
+					"uci": "g8f6",
+					"weight": 31,
+					"name": "Petrov Defense"
+				},
+				{
+					"uci": "d7d6",
+					"weight": 20,
+					"name": "Philidor Defense"
+				}
+			]
+		},
+		{
+			"fen": "r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3",
+			"name": "Ruy Lopez",
+			"moves": [
+				{
+					"uci": "a7a6",
+					"weight": 52,
+					"name": "Morphy Defense"
+				},
+				{
+					"uci": "g8f6",
+					"weight": 32,
+					"name": "Berlin Defense"
+				},
+				{
+					"uci": "f8c5",
+					"weight": 16,
+					"name": "Classical Defense"
+				}
+			]
+		},
+		{
+			"fen": "r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3",
+			"name": "Italian Game",
+			"moves": [
+				{
+					"uci": "f8c5",
+					"weight": 50,
+					"name": "Giuoco Piano"
+				},
+				{
+					"uci": "g8f6",
+					"weight": 36,
+					"name": "Two Knights Defense"
+				},
+				{
+					"uci": "f8e7",
+					"weight": 14,
+					"name": "Hungarian Defense"
+				}
+			]
+		},
+		{
+			"fen": "r1bqkbnr/pppp1ppp/2n5/4p3/3PP3/5N2/PPP2PPP/RNBQKB1R b KQkq - 0 3",
+			"name": "Scotch Game",
+			"moves": [
+				{
+					"uci": "e5d4",
+					"weight": 62,
+					"name": "Scotch Main Line"
+				},
+				{
+					"uci": "g8f6",
+					"weight": 24,
+					"name": "Schmidt Variation"
+				},
+				{
+					"uci": "f8c5",
+					"weight": 14,
+					"name": "Classical Development"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/pppp1ppp/5n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+			"name": "Petrov Defense",
+			"moves": [
+				{
+					"uci": "f3e5",
+					"weight": 65,
+					"name": "Classical Attack"
+				},
+				{
+					"uci": "d2d4",
+					"weight": 35,
+					"name": "Steinitz Attack"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6 0 2",
+			"name": "Sicilian Defense",
+			"moves": [
+				{
+					"uci": "g1f3",
+					"weight": 62,
+					"name": "Open Sicilian"
+				},
+				{
+					"uci": "c2c3",
+					"weight": 21,
+					"name": "Alapin Variation"
+				},
+				{
+					"uci": "b1c3",
+					"weight": 17,
+					"name": "Closed Sicilian"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pp2pppp/3p4/2p5/3PP3/5N2/PPP2PPP/RNBQKB1R b KQkq d3 0 3",
+			"name": "Open Sicilian: 3.d4",
+			"moves": [
+				{
+					"uci": "c5d4",
+					"weight": 86,
+					"name": "Open Sicilian Main Line"
+				},
+				{
+					"uci": "g8f6",
+					"weight": 14,
+					"name": "Najdorf move-order"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pp2pppp/3p4/8/3pP3/5N2/PPP2PPP/RNBQKB1R w KQkq - 0 4",
+			"name": "Open Sicilian: 3...cxd4",
+			"moves": [
+				{
+					"uci": "f3d4",
+					"weight": 84,
+					"name": "Open Sicilian Main Line"
+				},
+				{
+					"uci": "d1d4",
+					"weight": 16,
+					"name": "Chekhover Variation"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pp2pppp/3p4/8/3NP3/8/PPP2PPP/RNBQKB1R b KQkq - 0 4",
+			"name": "Open Sicilian: 4.Nxd4",
+			"moves": [
+				{
+					"uci": "g8f6",
+					"weight": 56,
+					"name": "Najdorf/Classical setup"
+				},
+				{
+					"uci": "b8c6",
+					"weight": 28,
+					"name": "Classical Sicilian"
+				},
+				{
+					"uci": "a7a6",
+					"weight": 16,
+					"name": "O'Kelly Variation"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pp2pppp/3p4/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 3",
+			"name": "Sicilian Defense: 2...d6",
+			"moves": [
+				{
+					"uci": "d2d4",
+					"weight": 64,
+					"name": "Open Sicilian"
+				},
+				{
+					"uci": "f1b5",
+					"weight": 22,
+					"name": "Moscow Variation"
+				},
+				{
+					"uci": "c2c3",
+					"weight": 14,
+					"name": "Alapin Setup"
+				}
+			]
+		},
+		{
+			"fen": "r1bqkbnr/pp1ppppp/2n5/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 1 3",
+			"name": "Sicilian Defense: 2...Nc6",
+			"moves": [
+				{
+					"uci": "d2d4",
+					"weight": 58,
+					"name": "Open Sicilian"
+				},
+				{
+					"uci": "f1b5",
+					"weight": 26,
+					"name": "Rossolimo Variation"
+				},
+				{
+					"uci": "b1c3",
+					"weight": 16,
+					"name": "Closed Sicilian"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pppp1ppp/4p3/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+			"name": "French Defense",
+			"moves": [
+				{
+					"uci": "d2d4",
+					"weight": 70,
+					"name": "French Main Line"
+				},
+				{
+					"uci": "b1c3",
+					"weight": 18,
+					"name": "Two Knights Variation"
+				},
+				{
+					"uci": "g1f3",
+					"weight": 12,
+					"name": "King's Indian Attack"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/ppp2ppp/4p3/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq - 0 3",
+			"name": "French Defense Main Structure",
+			"moves": [
+				{
+					"uci": "b1c3",
+					"weight": 42,
+					"name": "Classical Variation"
+				},
+				{
+					"uci": "b1d2",
+					"weight": 31,
+					"name": "Tarrasch Variation"
+				},
+				{
+					"uci": "e4e5",
+					"weight": 27,
+					"name": "Advance Variation"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pppp1ppp/2p5/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+			"name": "Caro-Kann Defense",
+			"moves": [
+				{
+					"uci": "d2d4",
+					"weight": 74,
+					"name": "Main Line"
+				},
+				{
+					"uci": "b1c3",
+					"weight": 15,
+					"name": "Two Knights Attack"
+				},
+				{
+					"uci": "g1f3",
+					"weight": 11,
+					"name": "Fantasy setup"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pp2pppp/2p5/3p4/3PP3/2N5/PP3PPP/R1BQKBNR b KQkq - 1 3",
+			"name": "Caro-Kann Classical move-order",
+			"moves": [
+				{
+					"uci": "d5e4",
+					"weight": 74,
+					"name": "Classical Main Line"
+				},
+				{
+					"uci": "g8f6",
+					"weight": 17,
+					"name": "Two Knights Variation"
+				},
+				{
+					"uci": "d8a5",
+					"weight": 9,
+					"name": "Bronstein-Larsen Variation"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pp2pppp/2p5/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq - 0 3",
+			"name": "Caro-Kann Main Structure",
+			"moves": [
+				{
+					"uci": "b1c3",
+					"weight": 44,
+					"name": "Classical Variation"
+				},
+				{
+					"uci": "b1d2",
+					"weight": 27,
+					"name": "Karpov Variation"
+				},
+				{
+					"uci": "e4e5",
+					"weight": 20,
+					"name": "Advance Variation"
+				},
+				{
+					"uci": "e4d5",
+					"weight": 9,
+					"name": "Exchange Variation"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq d3 0 1",
+			"name": "After 1.d4 - Queen's Pawn Opening",
+			"moves": [
+				{
+					"uci": "d7d5",
+					"weight": 30,
+					"name": "Queen's Gambit Declined setup"
+				},
+				{
+					"uci": "g8f6",
+					"weight": 34,
+					"name": "Indian Defense"
+				},
+				{
+					"uci": "e7e6",
+					"weight": 14,
+					"name": "French/QGD setup"
+				},
+				{
+					"uci": "c7c5",
+					"weight": 10,
+					"name": "Modern Benoni counter"
+				},
+				{
+					"uci": "g7g6",
+					"weight": 7,
+					"name": "King's Indian/Grunfeld fianchetto"
+				},
+				{
+					"uci": "c7c6",
+					"weight": 4,
+					"name": "Slav Defense"
+				},
+				{
+					"uci": "d7d6",
+					"weight": 1,
+					"name": "Old Indian setup"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/pppppppp/5n2/8/3P4/8/PPP1PPPP/RNBQKBNR w KQkq - 1 2",
+			"name": "Indian Defense setup",
+			"moves": [
+				{
+					"uci": "c2c4",
+					"weight": 58,
+					"name": "Queen's Pawn Main Line"
+				},
+				{
+					"uci": "g1f3",
+					"weight": 27,
+					"name": "Zukertort System"
+				},
+				{
+					"uci": "c1g5",
+					"weight": 15,
+					"name": "Trompowsky Attack"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/pppp1ppp/4pn2/8/2PP4/8/PP2PPPP/RNBQKBNR w KQkq - 0 3",
+			"name": "Queen's Indian/Nimzo setup",
+			"moves": [
+				{
+					"uci": "b1c3",
+					"weight": 43,
+					"name": "Nimzo-Indian Defense"
+				},
+				{
+					"uci": "g1f3",
+					"weight": 34,
+					"name": "Queen's Indian Defense"
+				},
+				{
+					"uci": "g2g3",
+					"weight": 23,
+					"name": "Catalan Opening"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/pppppp1p/5np1/8/2PP4/8/PP2PPPP/RNBQKBNR w KQkq - 0 3",
+			"name": "King's Indian/Grunfeld setup",
+			"moves": [
+				{
+					"uci": "b1c3",
+					"weight": 41,
+					"name": "Grunfeld Defense"
+				},
+				{
+					"uci": "g1f3",
+					"weight": 34,
+					"name": "King's Indian Defense"
+				},
+				{
+					"uci": "e2e4",
+					"weight": 25,
+					"name": "Classical Center"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR w KQkq d6 0 2",
+			"name": "Queen's Gambit Declined setup",
+			"moves": [
+				{
+					"uci": "c2c4",
+					"weight": 68,
+					"name": "Queen's Gambit"
+				},
+				{
+					"uci": "b1c3",
+					"weight": 20,
+					"name": "Veresov setup"
+				},
+				{
+					"uci": "e2e4",
+					"weight": 12,
+					"name": "Blackmar-Diemer idea"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/ppp1pppp/8/3p4/2PP4/8/PP2PPPP/RNBQKBNR b KQkq c3 0 2",
+			"name": "Queen's Gambit Accepted/Declined crossroads",
+			"moves": [
+				{
+					"uci": "e7e6",
+					"weight": 48,
+					"name": "Queen's Gambit Declined"
+				},
+				{
+					"uci": "d5c4",
+					"weight": 24,
+					"name": "Queen's Gambit Accepted"
+				},
+				{
+					"uci": "c7c6",
+					"weight": 28,
+					"name": "Slav Defense"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/ppp2ppp/4p3/3p4/2PPP3/2N5/PP3PPP/R1BQKBNR b KQkq - 1 3",
+			"name": "Queen's Gambit Declined: 3.Nc3",
+			"moves": [
+				{
+					"uci": "g8f6",
+					"weight": 62,
+					"name": "QGD Orthodox setup"
+				},
+				{
+					"uci": "b8c6",
+					"weight": 20,
+					"name": "QGD Classical development"
+				},
+				{
+					"uci": "c7c5",
+					"weight": 18,
+					"name": "Tarrasch counterplay"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/ppp1pppp/8/8/2PpP3/8/PP3PPP/RNBQKBNR w KQkq - 0 3",
+			"name": "Queen's Gambit Accepted",
+			"moves": [
+				{
+					"uci": "g1f3",
+					"weight": 46,
+					"name": "QGA Main Line"
+				},
+				{
+					"uci": "e4e5",
+					"weight": 33,
+					"name": "Central Space Advance"
+				},
+				{
+					"uci": "c4c5",
+					"weight": 21,
+					"name": "Queenside Space Gain"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pppppppp/8/8/2P5/8/PP1PPPPP/RNBQKBNR b KQkq c3 0 1",
+			"name": "English Opening",
+			"moves": [
+				{
+					"uci": "e7e5",
+					"weight": 32,
+					"name": "Reversed Sicilian"
+				},
+				{
+					"uci": "c7c5",
+					"weight": 28,
+					"name": "Symmetrical English"
+				},
+				{
+					"uci": "g8f6",
+					"weight": 24,
+					"name": "Anglo-Indian setup"
+				},
+				{
+					"uci": "e7e6",
+					"weight": 16,
+					"name": "Agincourt Defense setup"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pppp1ppp/8/4p3/2P5/8/PP1PPPPP/RNBQKBNR w KQkq e6 0 2",
+			"name": "English Opening: Reversed Sicilian",
+			"moves": [
+				{
+					"uci": "b1c3",
+					"weight": 44,
+					"name": "Closed Variation"
+				},
+				{
+					"uci": "g1f3",
+					"weight": 39,
+					"name": "King's English"
+				},
+				{
+					"uci": "g2g3",
+					"weight": 17,
+					"name": "Fianchetto Variation"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pppppppp/8/8/5N2/8/PPPPPPPP/RNBQKB1R b KQkq - 1 1",
+			"name": "Zukertort Opening",
+			"moves": [
+				{
+					"uci": "d7d5",
+					"weight": 46,
+					"name": "Classical Response"
+				},
+				{
+					"uci": "g8f6",
+					"weight": 32,
+					"name": "Indian setup"
+				},
+				{
+					"uci": "c7c5",
+					"weight": 22,
+					"name": "Sicilian setup"
+				}
+			]
+		},
+		{
+			"fen": "r1bqkbnr/1ppp1ppp/p1n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 4",
+			"name": "Ruy Lopez: Morphy Defense",
+			"moves": [
+				{
+					"uci": "b5a4",
+					"weight": 88,
+					"name": "Main Line"
+				},
+				{
+					"uci": "b5c6",
+					"weight": 12,
+					"name": "Exchange Variation"
+				}
+			]
+		},
+		{
+			"fen": "r1bqk2r/1ppp1ppp/p1n2n2/4p3/B3P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 1 4",
+			"name": "Ruy Lopez Main Line after 4.Ba4",
+			"moves": [
+				{
+					"uci": "b7b5",
+					"weight": 69,
+					"name": "Morphy Defense"
+				},
+				{
+					"uci": "e8g8",
+					"weight": 19,
+					"name": "Early Castling"
+				},
+				{
+					"uci": "d7d6",
+					"weight": 12,
+					"name": "Steinitz Defense"
+				}
+			]
+		},
+		{
+			"fen": "r1bqkb1r/pppp1ppp/2n2n2/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4",
+			"name": "Ruy Lopez: Berlin Defense",
+			"moves": [
+				{
+					"uci": "e1g1",
+					"weight": 58,
+					"name": "Berlin Main Line"
+				},
+				{
+					"uci": "d2d3",
+					"weight": 25,
+					"name": "Anti-Berlin"
+				},
+				{
+					"uci": "b1c3",
+					"weight": 17,
+					"name": "Four Knights transposition"
+				}
+			]
+		},
+		{
+			"fen": "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4",
+			"name": "Italian Game: 3...Bc5",
+			"moves": [
+				{
+					"uci": "c2c3",
+					"weight": 52,
+					"name": "Giuoco Piano"
+				},
+				{
+					"uci": "b2b4",
+					"weight": 24,
+					"name": "Evans Gambit"
+				},
+				{
+					"uci": "d2d3",
+					"weight": 24,
+					"name": "Italian Giuoco Pianissimo"
+				}
+			]
+		},
+		{
+			"fen": "r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/2P2N2/PP1P1PPP/RNBQK2R b KQkq - 0 4",
+			"name": "Giuoco Piano",
+			"moves": [
+				{
+					"uci": "g8f6",
+					"weight": 48,
+					"name": "Two Knights setup"
+				},
+				{
+					"uci": "d7d6",
+					"weight": 34,
+					"name": "Classical Giuoco"
+				},
+				{
+					"uci": "f7f5",
+					"weight": 18,
+					"name": "Greco Gambit style"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/pp2pppp/3p1n2/8/3NP3/8/PPP2PPP/RNBQKB1R w KQkq - 1 5",
+			"name": "Open Sicilian: 4...Nf6",
+			"moves": [
+				{
+					"uci": "b1c3",
+					"weight": 84,
+					"name": "Open Sicilian Main Line"
+				},
+				{
+					"uci": "f1d3",
+					"weight": 10,
+					"name": "Classical setup"
+				},
+				{
+					"uci": "f2f3",
+					"weight": 6,
+					"name": "Prins Variation"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/pp2pppp/3p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R b KQkq - 2 5",
+			"name": "Open Sicilian Main Position",
+			"moves": [
+				{
+					"uci": "a7a6",
+					"weight": 46,
+					"name": "Najdorf Variation"
+				},
+				{
+					"uci": "b8c6",
+					"weight": 30,
+					"name": "Classical Sicilian"
+				},
+				{
+					"uci": "e7e6",
+					"weight": 24,
+					"name": "Scheveningen setup"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/ppp2ppp/4p3/3p4/2PPP3/5N2/PP3PPP/RNBQKB1R b KQkq - 1 3",
+			"name": "QGD move-order: 3.Nf3",
+			"moves": [
+				{
+					"uci": "g8f6",
+					"weight": 64,
+					"name": "QGD Orthodox setup"
+				},
+				{
+					"uci": "f8e7",
+					"weight": 21,
+					"name": "QGD Classical setup"
+				},
+				{
+					"uci": "c7c5",
+					"weight": 15,
+					"name": "Tarrasch Defense"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/ppp2ppp/4pn2/3p4/2PPP3/2N5/PP3PPP/R1BQKBNR w KQkq - 2 4",
+			"name": "QGD Orthodox structure",
+			"moves": [
+				{
+					"uci": "c1g5",
+					"weight": 44,
+					"name": "Classical System"
+				},
+				{
+					"uci": "g1f3",
+					"weight": 33,
+					"name": "Main Development"
+				},
+				{
+					"uci": "c4d5",
+					"weight": 23,
+					"name": "Exchange Variation"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/pp2pppp/2p2n2/3p4/2PPP3/2N5/PP3PPP/R1BQKBNR w KQkq - 2 4",
+			"name": "Slav Main Structure",
+			"moves": [
+				{
+					"uci": "g1f3",
+					"weight": 46,
+					"name": "Main Line"
+				},
+				{
+					"uci": "c4d5",
+					"weight": 32,
+					"name": "Exchange Slav"
+				},
+				{
+					"uci": "d1b3",
+					"weight": 22,
+					"name": "Quiet System"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/ppp1pppp/8/8/2PpP3/5N2/PP3PPP/RNBQKB1R b KQkq - 1 3",
+			"name": "QGA Main Line after 3.Nf3",
+			"moves": [
+				{
+					"uci": "g8f6",
+					"weight": 55,
+					"name": "Classical Development"
+				},
+				{
+					"uci": "a7a6",
+					"weight": 24,
+					"name": "...a6 Variation"
+				},
+				{
+					"uci": "e7e6",
+					"weight": 21,
+					"name": "Semi-Slav transposition"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/ppp1pppp/8/3p4/8/5N2/PPPPPPPP/RNBQKB1R w KQkq d6 0 2",
+			"name": "Zukertort Opening: 1...d5",
+			"moves": [
+				{
+					"uci": "d2d4",
+					"weight": 48,
+					"name": "Reti to Queen's Pawn"
+				},
+				{
+					"uci": "c2c4",
+					"weight": 34,
+					"name": "Reti to English"
+				},
+				{
+					"uci": "g2g3",
+					"weight": 18,
+					"name": "King's Fianchetto Opening"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/pppppppp/5n2/8/3P4/5N2/PPP1PPPP/RNBQKB1R b KQkq - 2 2",
+			"name": "After 1.d4 Nf6 2.Nf3 (Reti/Indian Defense crossroads)",
+			"moves": [
+				{
+					"uci": "d7d5",
+					"weight": 32,
+					"name": "QGD/Slav transposition"
+				},
+				{
+					"uci": "g7g6",
+					"weight": 24,
+					"name": "King's Indian/Grunfeld setup"
+				},
+				{
+					"uci": "c7c5",
+					"weight": 18,
+					"name": "Benoni/Modern counterplay"
+				},
+				{
+					"uci": "e7e6",
+					"weight": 14,
+					"name": "QGD/French setup"
+				},
+				{
+					"uci": "d7d6",
+					"weight": 10,
+					"name": "Old Indian setup"
+				},
+				{
+					"uci": "f6e4",
+					"weight": 2,
+					"name": "Uncommon knight incursion"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/pppppppp/5n2/8/2P5/8/PP1PPPPP/RNBQKBNR w KQkq - 1 2",
+			"name": "English Opening: 1.c4 Nf6",
+			"moves": [
+				{
+					"uci": "b1c3",
+					"weight": 48,
+					"name": "Main Line with Nc3"
+				},
+				{
+					"uci": "g1f3",
+					"weight": 32,
+					"name": "King's English"
+				},
+				{
+					"uci": "d2d4",
+					"weight": 20,
+					"name": "Transposition to 1.d4"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/pppppppp/5n2/8/2P5/2N5/PP1PPPPP/R1BQKBNR b KQkq - 2 2",
+			"name": "English Opening: 1.c4 Nf6 2.Nc3",
+			"moves": [
+				{
+					"uci": "e7e6",
+					"weight": 52,
+					"name": "Queen's Indian setup"
+				},
+				{
+					"uci": "e7e5",
+					"weight": 30,
+					"name": "Reversed Sicilian structure"
+				},
+				{
+					"uci": "d7d5",
+					"weight": 18,
+					"name": "Central Challenge"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/pppppppp/5n2/8/2PP4/8/PP2PPPP/RNBQKBNR b KQkq c3 0 2",
+			"name": "Queen's Pawn: 1.d4 Nf6 2.c4",
+			"moves": [
+				{
+					"uci": "e7e6",
+					"weight": 45,
+					"name": "Queen's Indian/Nimzo paths"
+				},
+				{
+					"uci": "g7g6",
+					"weight": 35,
+					"name": "Grünfeld/King's Indian fianchetto"
+				},
+				{
+					"uci": "c7c5",
+					"weight": 12,
+					"name": "Benoni transposition"
+				},
+				{
+					"uci": "d7d5",
+					"weight": 8,
+					"name": "Symmetrical center"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/1ppp1ppp/p3pn2/8/B3P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 1 5",
+			"name": "Ruy Lopez: Main Classical Line",
+			"moves": [
+				{
+					"uci": "e1g1",
+					"weight": 68,
+					"name": "Castling main line"
+				},
+				{
+					"uci": "a4b3",
+					"weight": 18,
+					"name": "Bishop Retreat Setup"
+				},
+				{
+					"uci": "d2d3",
+					"weight": 14,
+					"name": "Slow setup"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pppp1ppp/8/4p3/2P5/2N5/PP1PPPPP/R1BQKBNR b KQkq - 1 3",
+			"name": "English Opening: 1.c4 e5 2.Nc3",
+			"moves": [
+				{
+					"uci": "g8f6",
+					"weight": 38,
+					"name": "Reversed Sicilian main"
+				},
+				{
+					"uci": "d7d6",
+					"weight": 27,
+					"name": "Closed structure"
+				},
+				{
+					"uci": "b8c6",
+					"weight": 22,
+					"name": "Classical development"
+				},
+				{
+					"uci": "c7c6",
+					"weight": 13,
+					"name": "Solid setup"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/ppp1pppp/8/3p4/3P4/5N2/PPP1PPPP/RNBQKB1R b KQkq - 1 2",
+			"name": "Queen's Pawn: 1.d4 d5 2.Nf3",
+			"moves": [
+				{
+					"uci": "c7c6",
+					"weight": 38,
+					"name": "Slav Defense main"
+				},
+				{
+					"uci": "e7e6",
+					"weight": 32,
+					"name": "Queen's Gambit Declined"
+				},
+				{
+					"uci": "c7c5",
+					"weight": 18,
+					"name": "Tarrasch-style Counterplay"
+				},
+				{
+					"uci": "g8f6",
+					"weight": 12,
+					"name": "Alternative development"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq e3 1 2",
+			"name": "Open Game: 1.e4 e5 2.Nf3",
+			"moves": [
+				{
+					"uci": "b8c6",
+					"weight": 64,
+					"name": "Three Knights / Four Knights path"
+				},
+				{
+					"uci": "g8f6",
+					"weight": 26,
+					"name": "Petrov Defense main"
+				},
+				{
+					"uci": "d7d6",
+					"weight": 10,
+					"name": "Philidor Defense"
+				}
+			]
+		},
+		{
+			"fen": "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+			"name": "Open Game: 1.e4 e5 2.Nf3 Nc6",
+			"moves": [
+				{
+					"uci": "f1b5",
+					"weight": 52,
+					"name": "Ruy Lopez main"
+				},
+				{
+					"uci": "f1c4",
+					"weight": 28,
+					"name": "Italian Game main"
+				},
+				{
+					"uci": "d2d4",
+					"weight": 20,
+					"name": "Scotch Game"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2",
+			"name": "Sicilian Defense Main: 1.e4 c5 2.Nf3",
+			"moves": [
+				{
+					"uci": "d7d6",
+					"weight": 56,
+					"name": "Najdorf/Classical/Dragon complex"
+				},
+				{
+					"uci": "b8c6",
+					"weight": 28,
+					"name": "Classical Sicilian"
+				},
+				{
+					"uci": "e7e6",
+					"weight": 16,
+					"name": "Scheveningen/Taimanov"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pp1ppppp/3p4/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 3",
+			"name": "Sicilian: 1.e4 c5 2.Nf3 d6",
+			"moves": [
+				{
+					"uci": "d2d4",
+					"weight": 58,
+					"name": "Open Sicilian fork"
+				},
+				{
+					"uci": "f1e2",
+					"weight": 24,
+					"name": "Classical fianchetto"
+				},
+				{
+					"uci": "c2c3",
+					"weight": 18,
+					"name": "Alapin Variation"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/ppp1pppp/3p4/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2",
+			"name": "French Defense: 1.d4 e6",
+			"moves": [
+				{
+					"uci": "c2c4",
+					"weight": 52,
+					"name": "French main with c4"
+				},
+				{
+					"uci": "d2d4",
+					"weight": 32,
+					"name": "Classical setup"
+				},
+				{
+					"uci": "g1f3",
+					"weight": 16,
+					"name": "King's Indian Attack"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/ppp1pppp/8/3p4/2PP4/8/PP2PPPP/RNBQKBNR b KQkq c3 0 3",
+			"name": "Semi-Closed: 1.d4 d5 2.c4",
+			"moves": [
+				{
+					"uci": "c7c6",
+					"weight": 48,
+					"name": "Slav Defense main line"
+				},
+				{
+					"uci": "e7e6",
+					"weight": 32,
+					"name": "Queen's Gambit Declined"
+				},
+				{
+					"uci": "d5c4",
+					"weight": 20,
+					"name": "Queen's Gambit Accepted"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pp1ppppp/2p5/8/2P5/8/PP1PPPPP/RNBQKBNR w KQkq - 0 1",
+			"name": "Slav Defense: 1.d4 c6",
+			"moves": [
+				{
+					"uci": "d2d4",
+					"weight": 74,
+					"name": "Semi-Closed main"
+				},
+				{
+					"uci": "b1c3",
+					"weight": 14,
+					"name": "Closed variation"
+				},
+				{
+					"uci": "g1f3",
+					"weight": 12,
+					"name": "Solid setup"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pp1ppppp/8/2p5/2P5/8/PP1PPPPP/RNBQKBNR w KQkq c6 0 2",
+			"name": "Symmetrical English: 1.c4 c5",
+			"moves": [
+				{
+					"uci": "b1c3",
+					"weight": 58,
+					"name": "Classical Symmetrical"
+				},
+				{
+					"uci": "d2d4",
+					"weight": 24,
+					"name": "Transposition to d4 Sicilian"
+				},
+				{
+					"uci": "g1f3",
+					"weight": 18,
+					"name": "Quiet setup"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/2N5/PPPP1PPP/R1BQKBNR b KQkq - 1 2",
+			"name": "Vienna Game: 1.e4 e5 2.Nc3",
+			"moves": [
+				{
+					"uci": "g8f6",
+					"weight": 52,
+					"name": "Vienna Main Line"
+				},
+				{
+					"uci": "b8c6",
+					"weight": 26,
+					"name": "Three Knights setup"
+				},
+				{
+					"uci": "f8c5",
+					"weight": 14,
+					"name": "Bishop development"
+				},
+				{
+					"uci": "d7d6",
+					"weight": 8,
+					"name": "Philidor style"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/pppp1ppp/5n2/4p3/4P3/2N5/PPPP1PPP/R1BQKBNR w KQkq - 2 3",
+			"name": "Vienna Game: 2...Nf6",
+			"moves": [
+				{
+					"uci": "f2f4",
+					"weight": 38,
+					"name": "Vienna Gambit"
+				},
+				{
+					"uci": "g1f3",
+					"weight": 34,
+					"name": "Three Knights Game"
+				},
+				{
+					"uci": "f1c4",
+					"weight": 18,
+					"name": "Bishop development"
+				},
+				{
+					"uci": "d2d3",
+					"weight": 10,
+					"name": "Quiet setup"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pp1ppppp/8/2p5/4P3/2P5/PP1P1PPP/RNBQKBNR b KQkq - 0 2",
+			"name": "Sicilian Defense: 1.e4 c5 2.c3",
+			"moves": [
+				{
+					"uci": "d7d5",
+					"weight": 48,
+					"name": "Alapin Main Counter"
+				},
+				{
+					"uci": "g8f6",
+					"weight": 28,
+					"name": "Alapin with ...Nf6"
+				},
+				{
+					"uci": "d7d6",
+					"weight": 14,
+					"name": "Scheveningen setup"
+				},
+				{
+					"uci": "e7e6",
+					"weight": 10,
+					"name": "French style setup"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pp2pppp/8/2pp4/4P3/2P5/PP1P1PPP/RNBQKBNR w KQkq d6 0 3",
+			"name": "Alapin Sicilian: 2...d5",
+			"moves": [
+				{
+					"uci": "e4d5",
+					"weight": 63,
+					"name": "Main Line capture"
+				},
+				{
+					"uci": "e4e5",
+					"weight": 23,
+					"name": "Advance Alapin"
+				},
+				{
+					"uci": "d2d4",
+					"weight": 14,
+					"name": "Center buildup"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pppp1ppp/4p3/8/2P5/8/PP1PPPPP/RNBQKBNR w KQkq - 0 2",
+			"name": "English Opening: 1.c4 e6",
+			"moves": [
+				{
+					"uci": "b1c3",
+					"weight": 44,
+					"name": "Classical development"
+				},
+				{
+					"uci": "g1f3",
+					"weight": 34,
+					"name": "Flexible setup"
+				},
+				{
+					"uci": "d2d4",
+					"weight": 22,
+					"name": "QGD transposition"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pppppp1p/6p1/8/3P4/8/PPP1PPPP/RNBQKBNR w KQkq - 0 2",
+			"name": "Modern Defense setup: 1.d4 g6",
+			"moves": [
+				{
+					"uci": "c2c4",
+					"weight": 49,
+					"name": "Main line expansion"
+				},
+				{
+					"uci": "e2e4",
+					"weight": 33,
+					"name": "Austrian style center"
+				},
+				{
+					"uci": "g1f3",
+					"weight": 18,
+					"name": "Flexible development"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pp1ppppp/8/2p5/8/5N2/PPPPPPPP/RNBQKB1R w KQkq c6 0 2",
+			"name": "Reti Opening: 1.Nf3 c5",
+			"moves": [
+				{
+					"uci": "c2c4",
+					"weight": 46,
+					"name": "English transposition"
+				},
+				{
+					"uci": "g2g3",
+					"weight": 31,
+					"name": "Kingside fianchetto"
+				},
+				{
+					"uci": "e2e4",
+					"weight": 23,
+					"name": "Sicilian reversed ideas"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pppppp1p/6p1/8/8/5N2/PPPPPPPP/RNBQKB1R w KQkq - 0 2",
+			"name": "Reti Opening: 1.Nf3 g6",
+			"moves": [
+				{
+					"uci": "d2d4",
+					"weight": 44,
+					"name": "Main center claim"
+				},
+				{
+					"uci": "c2c4",
+					"weight": 31,
+					"name": "English transposition"
+				},
+				{
+					"uci": "g2g3",
+					"weight": 25,
+					"name": "Fianchetto setup"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkbnr/pppp1ppp/4p3/8/8/5N2/PPPPPPPP/RNBQKB1R w KQkq - 0 2",
+			"name": "Reti Opening: 1.Nf3 e6",
+			"moves": [
+				{
+					"uci": "d2d4",
+					"weight": 47,
+					"name": "French transposition"
+				},
+				{
+					"uci": "c2c4",
+					"weight": 34,
+					"name": "English/QGD ideas"
+				},
+				{
+					"uci": "e2e4",
+					"weight": 19,
+					"name": "Kings pawn setup"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/ppp1pppp/5n2/3p4/3P4/5N2/PPP1PPPP/RNBQKB1R w KQkq d6 0 3",
+			"name": "Reti-Indian: 2...d5 main structure",
+			"moves": [
+				{
+					"uci": "c2c4",
+					"weight": 52,
+					"name": "Queen's Gambit transposition"
+				},
+				{
+					"uci": "g2g3",
+					"weight": 24,
+					"name": "Catalan/Reti fianchetto"
+				},
+				{
+					"uci": "e2e3",
+					"weight": 15,
+					"name": "Colle setup"
+				},
+				{
+					"uci": "c1g5",
+					"weight": 9,
+					"name": "Trompowsky/London style"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/ppp1pppp/5n2/3p4/2PP4/5N2/PP2PPPP/RNBQKB1R b KQkq c3 0 3",
+			"name": "Reti-Indian: 3.c4",
+			"moves": [
+				{
+					"uci": "e7e6",
+					"weight": 46,
+					"name": "QGD structure"
+				},
+				{
+					"uci": "c7c6",
+					"weight": 29,
+					"name": "Slav setup"
+				},
+				{
+					"uci": "g7g6",
+					"weight": 17,
+					"name": "King's Indian setup"
+				},
+				{
+					"uci": "d5c4",
+					"weight": 8,
+					"name": "QGA capture"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/pp2pppp/2p2n2/3p4/2PP4/5N2/PP2PPPP/RNBQKB1R w KQkq - 0 4",
+			"name": "Reti-Indian: 3.c4 c6",
+			"moves": [
+				{
+					"uci": "b1c3",
+					"weight": 45,
+					"name": "Slav main development"
+				},
+				{
+					"uci": "g2g3",
+					"weight": 31,
+					"name": "Catalan-style setup"
+				},
+				{
+					"uci": "e2e3",
+					"weight": 24,
+					"name": "Solid QP structure"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/ppp2ppp/4pn2/3p4/2PP4/5N2/PP2PPPP/RNBQKB1R w KQkq - 0 4",
+			"name": "Reti-Indian: 3.c4 e6",
+			"moves": [
+				{
+					"uci": "b1c3",
+					"weight": 47,
+					"name": "QGD main development"
+				},
+				{
+					"uci": "g2g3",
+					"weight": 30,
+					"name": "Catalan move order"
+				},
+				{
+					"uci": "e2e3",
+					"weight": 23,
+					"name": "Colle/QGD setup"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/ppp2ppp/4pn2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq - 2 4",
+			"name": "Reti-Indian: 3.c4 e6 4.Nc3",
+			"moves": [
+				{
+					"uci": "f8e7",
+					"weight": 39,
+					"name": "Classical QGD setup"
+				},
+				{
+					"uci": "c7c6",
+					"weight": 33,
+					"name": "Semi-Slav structure"
+				},
+				{
+					"uci": "b8d7",
+					"weight": 28,
+					"name": "Flexible development"
+				}
+			]
+		},
+		{
+			"fen": "rnbqk2r/ppp1bppp/4pn2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq - 3 5",
+			"name": "Reti-Indian: 3.c4 e6 4.Nc3 Be7",
+			"moves": [
+				{
+					"uci": "c1f4",
+					"weight": 43,
+					"name": "Classical development"
+				},
+				{
+					"uci": "e2e3",
+					"weight": 31,
+					"name": "Solid center"
+				},
+				{
+					"uci": "g2g3",
+					"weight": 26,
+					"name": "Catalan setup"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/pp3ppp/2p1pn2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq - 0 5",
+			"name": "Reti-Indian: 3.c4 e6 4.Nc3 c6",
+			"moves": [
+				{
+					"uci": "c1f4",
+					"weight": 39,
+					"name": "Main Slav setup"
+				},
+				{
+					"uci": "e2e3",
+					"weight": 34,
+					"name": "QGD/Slav structure"
+				},
+				{
+					"uci": "e2e4",
+					"weight": 27,
+					"name": "Space-gaining center"
+				}
+			]
+		},
+		{
+			"fen": "r1bqkb1r/pppn1ppp/4pn2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq - 3 5",
+			"name": "Reti-Indian: 3.c4 e6 4.Nc3 Nbd7",
+			"moves": [
+				{
+					"uci": "c1f4",
+					"weight": 41,
+					"name": "London/QGD development"
+				},
+				{
+					"uci": "g2g3",
+					"weight": 33,
+					"name": "Catalan structure"
+				},
+				{
+					"uci": "e2e3",
+					"weight": 26,
+					"name": "Flexible center"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/ppp1pppp/5n2/3p4/3P4/5NP1/PPP1PP1P/RNBQKB1R b KQkq - 0 3",
+			"name": "Reti-Indian: 3.g3",
+			"moves": [
+				{
+					"uci": "g7g6",
+					"weight": 42,
+					"name": "King's Indian setup"
+				},
+				{
+					"uci": "e7e6",
+					"weight": 37,
+					"name": "Flexible QGD setup"
+				},
+				{
+					"uci": "c7c5",
+					"weight": 21,
+					"name": "Benoni/English pressure"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/ppp2ppp/4pn2/3p4/3P4/5NP1/PPP1PP1P/RNBQKB1R w KQkq - 0 4",
+			"name": "Reti-Indian: 3.g3 e6",
+			"moves": [
+				{
+					"uci": "f1g2",
+					"weight": 43,
+					"name": "Main fianchetto development"
+				},
+				{
+					"uci": "c2c4",
+					"weight": 35,
+					"name": "Catalan/English transposition"
+				},
+				{
+					"uci": "c1g5",
+					"weight": 22,
+					"name": "Trompowsky pressure"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/pppppp1p/5np1/8/3P4/5NP1/PPP1PP1P/RNBQKB1R w KQkq - 0 4",
+			"name": "Reti-Indian: 3.g3 g6",
+			"moves": [
+				{
+					"uci": "f1g2",
+					"weight": 60,
+					"name": "Kingside fianchetto"
+				},
+				{
+					"uci": "c2c4",
+					"weight": 26,
+					"name": "English/Catalan transposition"
+				},
+				{
+					"uci": "b2b3",
+					"weight": 14,
+					"name": "Flexible queenside setup"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/pppppp1p/5np1/8/3P4/5NP1/PPP1PPBP/RNBQK2R b KQkq - 2 4",
+			"name": "Reti-Indian: 3.g3 g6 4.Bg2",
+			"moves": [
+				{
+					"uci": "f8g7",
+					"weight": 51,
+					"name": "King's Indian setup"
+				},
+				{
+					"uci": "d7d5",
+					"weight": 29,
+					"name": "Grunfeld/QGD strike"
+				},
+				{
+					"uci": "c7c6",
+					"weight": 20,
+					"name": "Slav-style center"
+				}
+			]
+		},
+		{
+			"fen": "rnbqk2r/ppppppbp/5np1/8/3P4/5NP1/PPP1PPBP/RNBQK2R w KQkq - 3 5",
+			"name": "Reti-Indian: 3.g3 g6 4.Bg2 Bg7",
+			"moves": [
+				{
+					"uci": "c2c4",
+					"weight": 44,
+					"name": "King's Indian/Grunfeld pressure"
+				},
+				{
+					"uci": "e1g1",
+					"weight": 32,
+					"name": "Quick kingside castling"
+				},
+				{
+					"uci": "b1c3",
+					"weight": 24,
+					"name": "Flexible development"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/ppp1pp1p/5np1/3p4/3P4/5NP1/PPP1PPBP/RNBQK2R w KQkq d6 0 5",
+			"name": "Reti-Indian: 3.g3 g6 4.Bg2 d5",
+			"moves": [
+				{
+					"uci": "c2c4",
+					"weight": 49,
+					"name": "Catalan transposition"
+				},
+				{
+					"uci": "e1g1",
+					"weight": 29,
+					"name": "Safe king development"
+				},
+				{
+					"uci": "b1c3",
+					"weight": 22,
+					"name": "Classical setup"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/pp1ppp1p/2p2np1/8/3P4/5NP1/PPP1PPBP/RNBQK2R w KQkq - 0 5",
+			"name": "Reti-Indian: 3.g3 g6 4.Bg2 c6",
+			"moves": [
+				{
+					"uci": "c2c4",
+					"weight": 46,
+					"name": "Main c4 break"
+				},
+				{
+					"uci": "e1g1",
+					"weight": 31,
+					"name": "King safety first"
+				},
+				{
+					"uci": "b1c3",
+					"weight": 23,
+					"name": "Natural development"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/pppppp1p/5np1/8/3P4/5N2/PPP1PPPP/RNBQKB1R w KQkq - 0 3",
+			"name": "Reti-Indian: 2...g6 setup",
+			"moves": [
+				{
+					"uci": "c2c4",
+					"weight": 48,
+					"name": "King's Indian/Grunfeld paths"
+				},
+				{
+					"uci": "g2g3",
+					"weight": 31,
+					"name": "Fianchetto system"
+				},
+				{
+					"uci": "c1g5",
+					"weight": 21,
+					"name": "Trompowsky style"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/pp1ppppp/5n2/2p5/3P4/5N2/PPP1PPPP/RNBQKB1R w KQkq c6 0 3",
+			"name": "Reti-Indian: 2...c5 setup",
+			"moves": [
+				{
+					"uci": "d4d5",
+					"weight": 39,
+					"name": "Advance Benoni setup"
+				},
+				{
+					"uci": "c2c4",
+					"weight": 37,
+					"name": "English/Benoni transposition"
+				},
+				{
+					"uci": "e2e3",
+					"weight": 24,
+					"name": "Flexible development"
+				}
+			]
+		},
+		{
+			"fen": "rnbqkb1r/pppp1ppp/4pn2/8/3P4/5N2/PPP1PPPP/RNBQKB1R w KQkq - 0 3",
+			"name": "Reti-Indian: 2...e6 setup",
+			"moves": [
+				{
+					"uci": "c2c4",
+					"weight": 49,
+					"name": "QGD/Nimzo move-order"
+				},
+				{
+					"uci": "g2g3",
+					"weight": 29,
+					"name": "Catalan-style setup"
+				},
+				{
+					"uci": "e2e3",
+					"weight": 22,
+					"name": "Colle/Zukertort setup"
+				}
+			]
+		}
+	]
+}
