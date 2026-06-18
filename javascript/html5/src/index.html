@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="om_scacchi - browser chess game with MCTS/UCT and alpha-beta AI" />
+  <meta name="theme-color" content="#2c3e50" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-title" content="om_scacchi" />
+  <link rel="icon" href="img/icons/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="img/icons/om_scacchi128.png" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="AUTHOR" content="Oliver Merkel" />
+  <meta name="COPYRIGHT" content="Oliver Merkel" />
+  <title>om_scacchi</title>
+  <link rel="stylesheet" href="css/index.css" />
+</head>
+<body>
+
+<div id="app">
+
+  <header id="app-header">
+    <button id="btn-menu" class="icon-btn" type="button" aria-label="Open menu" aria-controls="side-panel">
+      <img src="img/icons/icon-bars.svg" alt="" />
+    </button>
+    <span id="app-header-title">om_scacchi</span>
+    <span id="app-header-badge" aria-label="AI difficulty" aria-live="polite">W human | B human | Desktop</span>
+  </header>
+
+  <main id="app-content">
+    <section id="view-game" class="view">
+      <noscript>
+        <p>This application requires JavaScript. Please enable it in your browser settings.</p>
+      </noscript>
+      <div id="game-board-panel" class="game-panel board-panel">
+        <div id="board"></div>
+      </div>
+      <div id="game-info-panel" class="game-panel info-panel">
+        <details id="fen-card" class="game-card" open>
+          <summary class="card-header">FEN</summary>
+          <div class="card-content">
+            <input type="text" id="fen-input" aria-label="FEN notation" autocomplete="off" spellcheck="false" placeholder="Paste FEN here…" />
+            <button id="btn-fen-apply" type="button" class="btn btn-sm">Apply</button>
+            <span id="fen-status" class="fen-status" aria-live="polite"></span>
+          </div>
+        </details>
+        <details id="telemetry-card" class="game-card" open>
+          <summary class="card-header">Engine Info</summary>
+          <div class="card-content">
+            <dl class="telemetry-grid">
+              <dt>Depth</dt><dd id="tel-depth">–</dd>
+              <dt>Nodes</dt><dd id="tel-nodes">–</dd>
+              <dt>Score</dt><dd id="tel-score">–</dd>
+              <dt>PV</dt><dd id="tel-pv">–</dd>
+            </dl>
+          </div>
+        </details>
+        <details id="info-card" class="game-card" open>
+          <summary class="card-header">Info</summary>
+          <div class="card-content">
+            <dl class="telemetry-grid">
+              <dt>Opening</dt><dd id="tel-opening">–</dd>
+            </dl>
+          </div>
+        </details>
+        <details id="history-card" class="game-card" open>
+          <summary class="card-header">History</summary>
+          <div class="card-content" id="history-content">
+            <div id="move-history" class="move-history"></div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section id="view-rules" class="view view-section" hidden>
+      <h2>Rules</h2>
+
+        <p><b>om_scacchi</b> plays standard FIDE chess. White moves first. Click a piece to select it, then click a destination square to move.</p>
+
+        <details>
+          <summary>Piece Movement</summary>
+          <div>
+            <ul>
+              <li><b>King</b> – one square in any direction; castling allowed when path is clear and not in check.</li>
+              <li><b>Queen</b> – any number of squares diagonally, horizontally, or vertically.</li>
+              <li><b>Rook</b> – any number of squares horizontally or vertically.</li>
+              <li><b>Bishop</b> – any number of squares diagonally.</li>
+              <li><b>Knight</b> – L-shape (2+1 squares); the only piece that can jump over others.</li>
+              <li><b>Pawn</b> – one square forward (two from starting rank); captures diagonally one square forward.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>Special Moves</summary>
+          <div>
+            <ul>
+              <li><b>Castling</b> – King moves two squares toward the rook; rook jumps to the other side. Conditions: neither piece has moved, no pieces between them, king not in check and does not pass through check.</li>
+              <li><b>En passant</b> – A pawn that just advanced two squares can be captured by an opposing pawn as if it had only moved one square (available only immediately after the double advance).</li>
+              <li><b>Promotion</b> – A pawn reaching the 8th rank must promote to queen, rook, bishop, or knight.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>Game End and Draws</summary>
+          <div>
+            <ul>
+              <li><b>Checkmate</b> – King is in check and has no legal move; the attacking side wins.</li>
+              <li><b>Stalemate</b> – Side to move has no legal move but is not in check; draw.</li>
+              <li><b>50-move rule</b> – 50 moves without a pawn move or capture; draw.</li>
+              <li><b>Threefold repetition</b> – Same position occurs three times; draw.</li>
+              <li><b>Insufficient material</b> – Neither side can force checkmate; draw.</li>
+            </ul>
+          </div>
+        </details>
+
+      <button class="btn btn-back" type="button">&#8592; Back</button>
+    </section>
+
+    <section id="view-options" class="view view-section" hidden>
+      <h2>Options</h2>
+      <p class="hint-text">Changes take effect immediately on AI turns and on new games.</p>
+      <form class="options-form" id="options-form">
+        <fieldset>
+          <legend>White player is...</legend>
+          <label><input type="radio" name="firstplayer" value="Human" checked />Human</label>
+          <label><input type="radio" name="firstplayer" value="AI" />AI</label>
+        </fieldset>
+        <fieldset>
+          <legend>Black player is...</legend>
+          <label><input type="radio" name="secondplayer" value="Human" checked />Human</label>
+          <label><input type="radio" name="secondplayer" value="AI" />AI</label>
+        </fieldset>
+        <fieldset>
+          <legend>White AI difficulty</legend>
+          <label><input type="radio" name="difficultysouth" value="Easy" />Easy</label>
+          <label><input type="radio" name="difficultysouth" value="Medium" checked />Medium</label>
+          <label><input type="radio" name="difficultysouth" value="Hard" />Hard</label>
+        </fieldset>
+        <fieldset>
+          <legend>Black AI difficulty</legend>
+          <label><input type="radio" name="difficultynorth" value="Easy" />Easy</label>
+          <label><input type="radio" name="difficultynorth" value="Medium" checked />Medium</label>
+          <label><input type="radio" name="difficultynorth" value="Hard" />Hard</label>
+        </fieldset>
+        <fieldset>
+          <legend>AI device profile</legend>
+          <label><input type="radio" name="deviceprofile" value="Auto" checked />Auto (detect)</label>
+          <label><input type="radio" name="deviceprofile" value="Desktop" />Desktop</label>
+          <label><input type="radio" name="deviceprofile" value="Mobile" />Mobile</label>
+        </fieldset>
+        <fieldset>
+          <legend>Chess set theme</legend>
+          <label><input type="radio" name="chesssettheme" value="Glyph" checked />Glyph</label>
+          <label><input type="radio" name="chesssettheme" value="NiceSvg" />Nice SVG</label>
+        </fieldset>
+        <p class="hint-text" id="device-profile-hint">Auto currently resolves to Desktop.</p>
+      </form>
+      <button class="btn" id="btn-options-ok" type="button">OK</button>
+    </section>
+
+    <section id="view-about" class="view view-section" hidden>
+      <h2>About om_scacchi</h2>
+
+      <h3>Legal</h3>
+      <figure class="diagram" style="float:right;margin-left:12px;width:35%;">
+        <img src="img/oliver_scacchi.jpg" alt="Oliver Merkel" />
+        <figcaption>
+          Oliver Merkel,
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">cc-by-nc-nd 4.0</a>.
+        </figcaption>
+      </figure>
+      <p>
+        Copyright &copy; 2016, 2026<br />
+        <em>@author</em> Oliver Merkel, Merkel(dot)Oliver(at)web(dot)de.<br />
+        All rights reserved. Logos, brands, and trademarks belong to their respective owners.
+      </p>
+      <p>All source code (HTML, JavaScript, CSS) is released under the <strong>MIT License</strong>.</p>
+      <p>
+        Images are licensed under
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0" target="_blank">
+          Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+        </a>.
+      </p>
+
+      <details>
+        <summary>Third-party Code Licenses</summary>
+        <div>
+          <p>This version uses <strong>no third-party libraries</strong>.</p>
+          <p>The AI engine uses the UCT / MCTS algorithm.</p>
+        </div>
+      </details>
+
+      <button class="btn btn-back" type="button">&#8592; Back</button>
+    </section>
+  </main>
+
+</div>
+
+<div id="panel-overlay" hidden></div>
+
+<div id="promotion-dialog" hidden aria-modal="true" role="dialog" aria-label="Choose promotion piece">
+  <p class="promotion-title">Promote pawn to:</p>
+  <div class="promotion-choices">
+    <button type="button" data-piece="q">♕ Queen</button>
+    <button type="button" data-piece="r">♖ Rook</button>
+    <button type="button" data-piece="b">♗ Bishop</button>
+    <button type="button" data-piece="n">♘ Knight</button>
+  </div>
+</div>
+
+<nav id="side-panel" aria-label="Main navigation">
+  <p class="panel-title">om_scacchi</p>
+  <ul class="panel-nav">
+    <li><button id="btn-panel-close" type="button">&#10005; Close</button></li>
+    <li class="panel-divider" aria-orientation="horizontal"></li>
+    <li id="nav-resume-item" hidden><button id="nav-resume" type="button">&#9654; Resume</button></li>
+    <li><button id="nav-new" type="button">&#9654; New Game</button></li>
+    <li class="panel-divider" aria-orientation="horizontal"></li>
+    <li><button id="nav-rules" type="button">Rules&hellip;</button></li>
+    <li><button id="nav-options" type="button">Options&hellip;</button></li>
+    <li><button id="nav-about" type="button">About&hellip;</button></li>
+  </ul>
+</nav>
+
+<script type="module" src="js/hmi.js"></script>
+
+<script>
+  // Register Service Worker for PWA support
+  // Service Workers require HTTPS (except localhost for development)
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+    navigator.serviceWorker.register('sw.js').then(registration => {
+      console.log('Service Worker registered successfully:', registration);
+    }).catch(error => {
+      console.log('Service Worker registration failed:', error);
+    });
+  }
+</script>
+
+</body>
+</html>
+

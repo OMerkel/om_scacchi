@@ -191,10 +191,36 @@ npm run test:all
 npm run benchmark:engine
 ```
 
+### Self-play Elo gauntlet
+
+```sh
+npm run benchmark:selfplay
+```
+
+Example with explicit budget and variant under test:
+
+```sh
+node scripts/selfplay-gauntlet.js --games 40 --depth 6 --nodes 1200000 --candidate '{"useNullMovePruning":false}' --record
+```
+
+### Self-play trend dashboard
+
+```sh
+npm run benchmark:selfplay:trend
+```
+
+Read only the most recent runs:
+
+```sh
+node scripts/selfplay-trend.js --last 10
+```
+
 ## Documentation
 
 - `doc/computer_chess.md` - engine representation and search notes.
-- `doc/software_architecture.md` - target architecture and runtime interaction model.
+- `doc/software_architecture.md` - current architecture and runtime interaction model.
+- `doc/engine_protocol.md` - worker/UI message protocol, payloads, and difficulty budget mapping.
+- `doc/contributor_checks.md` - pre-PR validation commands and contributor checklist.
 - `doc/engine_mcts_ucb.md` - legacy UCT/MCTS details.
 
 ## Troubleshooting

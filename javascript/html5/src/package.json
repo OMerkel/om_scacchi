@@ -1,0 +1,28 @@
+{
+	"name": "om_scacchi",
+	"version": "1.0.0",
+	"description": "om_scacchi - browser chess game with MCTS/UCT and alpha-beta AI",
+	"type": "module",
+	"scripts": {
+		"dev": "node tests/server.js",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"test:coverage": "vitest run --coverage",
+		"test:e2e": "playwright test",
+		"benchmark:engine": "node scripts/benchmark-engine-variants.js",
+		"benchmark:selfplay": "node scripts/selfplay-gauntlet.js",
+		"benchmark:selfplay:trend": "node scripts/selfplay-trend.js",
+		"test:all": "node scripts/run-tests-all.js",
+		"build": "echo 'Static files ready - deploy src/ folder to hosting'"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.15",
+		"@playwright/test": "^1.52.0",
+		"@vitest/coverage-v8": "^3.0.0",
+		"jsdom": "^29.1.1",
+		"vitest": "^3.0.0"
+	},
+	"overrides": {
+		"esbuild": "^0.28.1"
+	}
+}

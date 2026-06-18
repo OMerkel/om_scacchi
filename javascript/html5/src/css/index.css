@@ -1,0 +1,718 @@
+/* Copyright (c) 2016,2026 Oliver Merkel. All rights reserved. MIT License */
+
+/* Guard the HTML [hidden] attribute against accidental CSS override.
+   Required when any CSS rule sets display on the same elements. */
+[hidden] {
+	display: none;
+}
+
+/* Keep section visibility deterministic even when view IDs set display rules. */
+#view-game[hidden],
+#view-rules[hidden],
+#view-options[hidden],
+#view-about[hidden] {
+	display: none;
+}
+
+/* =========================================================================
+   CSS custom properties (design tokens)
+   ========================================================================= */
+
+:root {
+	--color-bg: #1a1a2e;
+	--color-surface: #16213e;
+	--color-border: #0f3460;
+	--color-accent: #e94560;
+	--color-text: #e0e0e0;
+	--color-text-dim: #888;
+	--color-gold: #ffcc00;
+
+	--header-h: 52px;
+	--panel-w: 260px;
+	--radius: 8px;
+	--transition: 0.25s ease;
+
+	--font-ui: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+
+/* =========================================================================
+   Reset / base
+   ========================================================================= */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html,
+body {
+	height: 100%;
+	background: var(--color-bg);
+	color: var(--color-text);
+	font-family: var(--font-ui);
+	font-size: 16px;
+	overflow: hidden;
+}
+
+a {
+	color: var(--color-accent);
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+
+ul {
+	list-style: none;
+}
+
+/* =========================================================================
+   Layout shell
+   ========================================================================= */
+
+#app {
+	display: flex;
+	flex-direction: column;
+	height: 100dvh; /* dynamic viewport height */
+}
+
+/* ---- header ---- */
+
+#app-header {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	height: var(--header-h);
+	padding: 0 12px;
+	background: var(--color-surface);
+	border-bottom: 1px solid var(--color-border);
+	z-index: 10;
+	flex-shrink: 0;
+}
+
+#app-header-title {
+	font-size: 1.25rem;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	flex: 1;
+	text-align: center;
+	color: var(--color-gold);
+}
+
+#app-header-badge {
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	color: var(--color-text);
+	background: var(--color-border);
+	border: 1px solid #1b4d85;
+	border-radius: 999px;
+	padding: 4px 10px;
+	white-space: nowrap;
+}
+
+/* ---- main content area ---- */
+
+#app-content {
+	flex: 1;
+	overflow-y: auto;
+	position: relative;
+}
+
+/* =========================================================================
+   Views (game / rules / options / about)
+   ========================================================================= */
+
+.view {
+	padding: 12px 16px;
+	max-width: 780px;
+	margin: 0 auto;
+}
+
+/* game view uses all available height with grid layout */
+#view-game {
+	display: grid;
+	grid-template-columns: 1fr 360px;
+	grid-template-rows: 1fr;
+	height: 100%;
+	padding: 8px;
+	gap: 8px;
+	align-items: stretch;
+	max-width: none;
+	margin: 0;
+}
+
+@media (max-width: 900px) {
+	#view-game {
+		grid-template-columns: 1fr;
+		grid-template-rows: auto 1fr;
+	}
+}
+
+.game-panel {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.board-panel {
+	min-height: 0;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+#board {
+	flex: 1;
+	min-height: 0;
+	min-width: 0;
+}
+
+.info-panel {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	overflow-y: auto;
+}
+
+/* ── Game info cards (FEN, telemetry, history) ─────────────────────────────── */
+
+.game-card {
+	background: var(--color-surface);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius);
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+}
+
+.card-header {
+	padding: 8px 14px;
+	font-size: 0.85rem;
+	font-weight: 600;
+	color: var(--color-text-dim);
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	user-select: none;
+	border-bottom: 1px solid var(--color-border);
+	cursor: pointer;
+	list-style: none; /* remove default triangle on <summary> */
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+/* Custom fold indicator */
+.card-header::after {
+	content: "▲";
+	font-size: 0.6rem;
+	margin-left: auto;
+	transition: transform var(--transition);
+}
+
+details.game-card:not([open]) .card-header::after {
+	transform: rotate(180deg);
+}
+
+details.game-card:not([open]) .card-header {
+	border-bottom: none;
+}
+
+.card-content {
+	padding: 10px 14px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	overflow-y: auto;
+	flex: 1;
+	min-height: 0;
+}
+
+#history-content {
+	overflow-y: auto;
+	min-height: 0;
+	scrollbar-gutter: stable;
+}
+
+#history-card[open] #history-content {
+	max-height: clamp(8rem, 30vh, 14rem);
+}
+
+/* Move history ──────────────────────────────────────────────────────────────── */
+
+.move-history {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	font-size: 0.85rem;
+	align-content: flex-start;
+	padding-right: 2px;
+}
+
+#history-content {
+	scrollbar-width: thin;
+	scrollbar-color: var(--color-border) transparent;
+}
+
+#history-content::-webkit-scrollbar {
+	width: 10px;
+}
+
+#history-content::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+#history-content::-webkit-scrollbar-thumb {
+	background-color: var(--color-border);
+	border-radius: 999px;
+	border: 2px solid transparent;
+	background-clip: content-box;
+}
+
+#history-content::-webkit-scrollbar-thumb:hover {
+	background-color: var(--color-text-dim);
+}
+
+@media (max-width: 900px) {
+	#history-card[open] #history-content {
+		max-height: clamp(7rem, 26vh, 10rem);
+	}
+}
+
+.move-item {
+	background: var(--color-bg);
+	border: 1px solid var(--color-border);
+	border-radius: 3px;
+	padding: 4px 8px;
+	color: var(--color-text);
+	font: 0.8rem monospace;
+	min-width: fit-content;
+	cursor: pointer;
+	transition: background-color 0.15s ease;
+}
+
+.move-item:hover {
+	background: var(--color-border);
+}
+
+.move-item.selected {
+	background: var(--color-accent);
+	border-color: var(--color-accent);
+	color: var(--color-bg);
+	font-weight: 700;
+}
+
+.move-number {
+	color: var(--color-text-dim);
+	margin-right: 4px;
+	font-weight: 600;
+}
+
+/* FEN card ─────────────────────────────────────────────────────────────────── */
+
+#fen-input {
+	width: 100%;
+	box-sizing: border-box;
+	background: var(--color-bg);
+	border: 1px solid var(--color-border);
+	border-radius: 4px;
+	color: var(--color-text);
+	font: 0.8rem monospace;
+	padding: 6px 8px;
+}
+
+#fen-input:focus {
+	outline: 2px solid var(--color-accent);
+	border-color: transparent;
+}
+
+.fen-status {
+	font-size: 0.78rem;
+	color: #f87171;
+	width: 100%;
+	min-height: 1rem;
+}
+
+/* Telemetry card ─────────────────────────────────────────────────────────── */
+
+.telemetry-grid {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 4px 16px;
+	font-size: 0.82rem;
+	margin: 0;
+}
+
+.telemetry-grid dt {
+	color: var(--color-text-dim);
+	font-weight: 600;
+}
+
+.telemetry-grid dd {
+	margin: 0;
+	color: var(--color-text);
+	font: 0.82rem monospace;
+	word-break: break-all;
+}
+
+/* Promotion dialog ──────────────────────────────────────────────────────── */
+
+#promotion-dialog {
+	position: fixed;
+	inset: 0;
+	z-index: 100;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.65);
+}
+
+#promotion-dialog[hidden] {
+	display: none;
+}
+
+.promotion-title {
+	color: var(--color-text);
+	font-size: 1rem;
+	font-weight: 600;
+	margin-bottom: 12px;
+}
+
+.promotion-choices {
+	display: flex;
+	gap: 12px;
+}
+
+.promotion-choices button {
+	font-size: 1.6rem;
+	padding: 12px 16px;
+	background: var(--color-surface);
+	border: 2px solid var(--color-border);
+	border-radius: var(--radius);
+	color: var(--color-text);
+	cursor: pointer;
+	transition:
+		background var(--transition),
+		border-color var(--transition);
+}
+
+.promotion-choices button:hover {
+	background: var(--color-border);
+	border-color: var(--color-accent);
+}
+
+/* =========================================================================
+   Icon buttons (hamburger, back)
+   ========================================================================= */
+
+.icon-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	padding: 4px;
+	border-radius: 50%;
+	flex-shrink: 0;
+	transition: background var(--transition);
+}
+
+.icon-btn:hover {
+	background: var(--color-border);
+}
+
+.icon-btn img,
+.icon-btn svg {
+	width: 24px;
+	height: 24px;
+	filter: invert(1);
+}
+
+/* =========================================================================
+   Board container
+   ========================================================================= */
+
+#board {
+	width: 100%;
+	max-width: min(
+		calc(100vw - 12px),
+		calc((100dvh - var(--header-h)) * 800 / 860)
+	);
+	aspect-ratio: 800 / 860;
+	overflow: hidden;
+	border-radius: var(--radius);
+	box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+}
+
+#board svg {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+/* =========================================================================
+   Side panel
+   ========================================================================= */
+
+#panel-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.45);
+	z-index: 40;
+}
+
+#side-panel {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: var(--panel-w);
+	background: var(--color-surface);
+	border-right: 1px solid var(--color-border);
+	z-index: 50;
+	transform: translateX(calc(0px - var(--panel-w)));
+	transition: transform var(--transition);
+	display: flex;
+	flex-direction: column;
+	padding: 16px 0;
+}
+
+#side-panel.open {
+	transform: translateX(0);
+}
+
+.panel-title {
+	font-size: 1rem;
+	font-weight: 600;
+	padding: 0 20px 12px;
+	color: var(--color-text-dim);
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.panel-nav li a,
+.panel-nav li button {
+	display: block;
+	width: 100%;
+	padding: 12px 20px;
+	background: none;
+	border: none;
+	text-align: left;
+	color: var(--color-text);
+	font-size: 1rem;
+	cursor: pointer;
+	transition: background var(--transition);
+}
+
+.panel-nav li a:hover,
+.panel-nav li button:hover {
+	background: var(--color-border);
+	text-decoration: none;
+}
+
+.panel-divider {
+	height: 1px;
+	background: var(--color-border);
+	margin: 8px 0;
+}
+
+/* =========================================================================
+   Content sections (rules / options / about)
+   ========================================================================= */
+
+.view-section {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.view-section h2 {
+	font-size: 1.3rem;
+	color: var(--color-gold);
+	border-bottom: 1px solid var(--color-border);
+	padding-bottom: 6px;
+}
+
+.view-section h3 {
+	font-size: 1.1rem;
+	color: var(--color-text);
+	margin-top: 8px;
+}
+
+.view-section h4 {
+	font-size: 1rem;
+	color: var(--color-accent);
+}
+
+.view-section p,
+.view-section li {
+	line-height: 1.6;
+}
+
+.view-section ol,
+.view-section ul {
+	padding-left: 1.4em;
+}
+
+/* Collapsible rules sections */
+.view-section details {
+	background: var(--color-surface);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius);
+	overflow: hidden;
+}
+
+.view-section details summary {
+	padding: 10px 14px;
+	cursor: pointer;
+	font-weight: 600;
+	list-style: none;
+	user-select: none;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.view-section details summary::after {
+	content: "›";
+	font-size: 1.2rem;
+	transition: transform var(--transition);
+}
+
+.view-section details[open] summary::after {
+	transform: rotate(90deg);
+}
+
+.view-section details > div {
+	padding: 12px 14px;
+	border-top: 1px solid var(--color-border);
+}
+
+/* Diagram figures */
+figure.diagram {
+	display: inline-block;
+	max-width: 360px;
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius);
+	overflow: hidden;
+	margin: 8px 0;
+	vertical-align: top;
+}
+
+figure.diagram img,
+figure.diagram embed {
+	width: 100%;
+	display: block;
+}
+
+figure.diagram figcaption {
+	background: var(--color-border);
+	color: var(--color-text-dim);
+	font-style: italic;
+	font-size: 0.85rem;
+	padding: 6px 10px;
+}
+
+/* =========================================================================
+   Options form
+   ========================================================================= */
+
+.options-form {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.options-form fieldset {
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius);
+	padding: 12px 16px;
+}
+
+.options-form legend {
+	padding: 0 8px;
+	font-weight: 600;
+	color: var(--color-text-dim);
+}
+
+.options-form label {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 6px 0;
+	cursor: pointer;
+}
+
+.options-form input[type="radio"],
+.options-form input[type="checkbox"] {
+	width: 18px;
+	height: 18px;
+	accent-color: var(--color-accent);
+	cursor: pointer;
+}
+
+.hint-text {
+	font-size: 0.85rem;
+	color: var(--color-text-dim);
+	font-style: italic;
+}
+
+/* =========================================================================
+   Buttons
+   ========================================================================= */
+
+.btn {
+	display: inline-block;
+	padding: 10px 22px;
+	background: var(--color-accent);
+	color: #fff;
+	border: none;
+	border-radius: var(--radius);
+	font-size: 1rem;
+	cursor: pointer;
+	transition: opacity var(--transition);
+	text-align: center;
+}
+
+.btn:hover {
+	opacity: 0.85;
+	text-decoration: none;
+	color: #fff;
+}
+
+.btn-secondary {
+	background: var(--color-border);
+	color: var(--color-text);
+}
+
+.btn-back {
+	background: var(--color-surface);
+	border: 1px solid var(--color-border);
+	color: var(--color-text);
+}
+
+/* =========================================================================
+   Responsive adjustments
+   ========================================================================= */
+
+@media (max-width: 480px) {
+	#app-header-title {
+		font-size: 1rem;
+	}
+	#app-header-badge {
+		font-size: 0.65rem;
+		padding: 3px 8px;
+	}
+	.view {
+		padding: 8px 10px;
+	}
+}

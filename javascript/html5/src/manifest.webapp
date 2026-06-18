@@ -1,0 +1,23 @@
+{
+	"version": "0.7",
+	"name": "om_scacchi",
+	"description": "om_scacchi - browser chess game with MCTS/UCT and alpha-beta AI",
+	"launch_path": "/index.html",
+	"orientation": "landscape-primary",
+	"icons": {
+		"16": "/img/icons/om_scacchi16.png",
+		"32": "/img/icons/om_scacchi32.png",
+		"48": "/img/icons/om_scacchi48.png",
+		"60": "/img/icons/om_scacchi60.png",
+		"64": "/img/icons/om_scacchi64.png",
+		"90": "/img/icons/om_scacchi90.png",
+		"120": "/img/icons/om_scacchi120.png",
+		"128": "/img/icons/om_scacchi128.png",
+		"256": "/img/icons/om_scacchi256.png"
+	},
+	"developer": {
+		"name": "Oliver Merkel",
+		"url": "https://github.com/OMerkel"
+	},
+	"installs_allowed_from": ["*"]
+}
