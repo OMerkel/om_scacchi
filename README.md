@@ -11,6 +11,10 @@
 
 Browser chess game built with modern ES modules, a worker-owned engine loop, and no runtime UI framework.
 
+## Play Online
+
+- [Start game now...](https://omerkel.github.io/om_scacchi/javascript/html5/src/)
+
 ## Highlights
 
 - Full FIDE chess rules: castling, en passant, promotions, check/checkmate/stalemate, threefold repetition, 50-move rule, and insufficient material draws.
