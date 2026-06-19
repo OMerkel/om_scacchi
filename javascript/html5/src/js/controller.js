@@ -23,6 +23,7 @@ import { createTranspositionTable } from "./chess/transposition_table.js";
 let chessPosition = createInitialPosition();
 let positionHistory = [createInitialPosition()]; // Track all positions for undo
 let moveHistory = []; // Track all moves (parallel to positionHistory)
+let startedFromCustomFen = false; // Flag to send moveHistory for custom FEN games
 let gameSessionId = 1;
 const persistentTt = createTranspositionTable(120000);
 let settings = {
@@ -287,8 +288,18 @@ self.addEventListener("message", async ({ data }) => {
 						typeof entry === "string" ? entry : (entry?.uci ?? ""),
 				  )
 			: [];
+			// If starting from custom FEN, prepend a special entry to moveHistory
+			// so the UI displays the FEN as the first history entry
+			startedFromCustomFen = false;
+			if (data.startFromCustomFen && data.fen) {
+				moveHistory = [{ type: "fen-start", fen: data.fen }, ...moveHistory];
+				startedFromCustomFen = true;
+			}
 			const status = getGameStatus(chessPosition);
-			postChess("chess_redraw", { status });
+			postChess("chess_redraw", {
+				status,
+				...(startedFromCustomFen && { moveHistory }),
+			});
 
 			if (status.terminal) break;
 
@@ -463,28 +474,38 @@ self.addEventListener("message", async ({ data }) => {
 				break;
 			}
 
-			// Replay moves from the start up to plyIndex
-			chessPosition = createInitialPosition();
-			for (let i = 0; i <= plyIndex; i++) {
-				if (i < moveHistory.length) {
-					const uci = moveHistory[i];
-					const legal = generateLegalMoves(chessPosition);
-					const move = legal.find((m) => moveToUci(m) === uci);
-					if (!move) {
-						postChess("chess_redraw", {
-							info: "move_not_found",
-							isBrowseRedraw: true,
-						});
-						return;
-					}
-					chessPosition = applyMove(chessPosition, move);
+			// Detect custom FEN starting entry; start from that position and skip it in replay
+			const fenStartB = moveHistory[0]?.type === "fen-start" ? moveHistory[0] : null;
+			const firstUciIdxB = fenStartB ? 1 : 0;
+			if (fenStartB) {
+				try {
+					chessPosition = createPositionFromFen(fenStartB.fen);
+				} catch {
+					chessPosition = createInitialPosition();
 				}
+			} else {
+				chessPosition = createInitialPosition();
+			}
+
+			for (let i = firstUciIdxB; i <= plyIndex; i++) {
+				const uci = moveHistory[i];
+				const legal = generateLegalMoves(chessPosition);
+				const move = legal.find((m) => moveToUci(m) === uci);
+				if (!move) {
+					postChess("chess_redraw", {
+						info: "move_not_found",
+						isBrowseRedraw: true,
+					});
+					return;
+				}
+				chessPosition = applyMove(chessPosition, move);
 			}
 
 			const status = getGameStatus(chessPosition);
 			postChess("chess_redraw", {
 				status,
-				latestMoveUci: moveHistory[plyIndex] ?? null,
+				// Only set latestMoveUci when it is an actual UCI string, not the FEN entry object
+				latestMoveUci: typeof moveHistory[plyIndex] === "string" ? moveHistory[plyIndex] : null,
 				isBrowseRedraw: true,
 			});
 			break;
@@ -505,9 +526,20 @@ self.addEventListener("message", async ({ data }) => {
 			moveHistory.length = plyIndex + 1;
 			positionHistory.length = plyIndex + 2; // +2 because positions are one ahead of moves
 
-			// Replay to ensure chessPosition is correct
-			chessPosition = createInitialPosition();
-			for (let i = 0; i <= plyIndex; i++) {
+			// Detect custom FEN starting entry; start from that position and skip it in replay
+			const fenStartC = moveHistory[0]?.type === "fen-start" ? moveHistory[0] : null;
+			const firstUciIdxC = fenStartC ? 1 : 0;
+			if (fenStartC) {
+				try {
+					chessPosition = createPositionFromFen(fenStartC.fen);
+				} catch {
+					chessPosition = createInitialPosition();
+				}
+			} else {
+				chessPosition = createInitialPosition();
+			}
+
+			for (let i = firstUciIdxC; i <= plyIndex; i++) {
 				const uci = moveHistory[i];
 				const legal = generateLegalMoves(chessPosition);
 				const move = legal.find((m) => moveToUci(m) === uci);

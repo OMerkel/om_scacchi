@@ -51,6 +51,7 @@ export const Actions = Object.freeze({
 	EXIT_BROWSE_MODE: "EXIT_BROWSE_MODE",
 	SET_SELECTED_PLY: "SET_SELECTED_PLY",
 	TRUNCATE_MOVE_HISTORY: "TRUNCATE_MOVE_HISTORY",
+	SET_MOVE_HISTORY: "SET_MOVE_HISTORY",
 });
 
 // ---------------------------------------------------------------------------
@@ -178,6 +179,12 @@ export const appReducer = (state, action) => {
 			return {
 				...state,
 				moveHistory: state.moveHistory.slice(0, action.plyIndex + 1),
+			};
+
+		case Actions.SET_MOVE_HISTORY:
+			return {
+				...state,
+				moveHistory: action.moveHistory ?? [],
 			};
 
 		default:

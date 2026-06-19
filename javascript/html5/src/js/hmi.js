@@ -207,23 +207,56 @@ const updateMoveHistory = (moveHistory) => {
 	}
 
 	historyDiv.innerHTML = "";
-	let currentNumber = 1;
 
-	for (let i = 0; i < moveHistory.length; i++) {
+	// Detect custom FEN start entry and extract side-to-move + move number
+	const fenEntry = moveHistory[0]?.type === "fen-start" ? moveHistory[0] : null;
+	let startSide = "w";
+	let currentMoveNumber = 1;
+	if (fenEntry) {
+		const fenParts = (fenEntry.fen ?? "").split(" ");
+		startSide = fenParts[1] === "b" ? "b" : "w";
+		currentMoveNumber = parseInt(fenParts[5], 10) || 1;
+		// Render FEN entry as a clickable button (plyIndex 0 in store moveHistory)
+		const fenBtn = document.createElement("button");
+		fenBtn.className = "move-item fen-start-btn";
+		fenBtn.type = "button";
+		fenBtn.textContent = "[Custom FEN]";
+		fenBtn.dataset.plyIndex = "0";
+		fenBtn.addEventListener("click", () => {
+			store.dispatch({ type: Actions.ENTER_BROWSE_MODE, plyIndex: 0 });
+			sendToEngine("chess_browse_to_ply", { plyIndex: 0 });
+		});
+		historyDiv.appendChild(fenBtn);
+	}
+
+	// Actual moves start after FEN entry (if present)
+	const firstMoveIdx = fenEntry ? 1 : 0;
+	// halfMoveParity: 0 = white half-move, 1 = black half-move
+	let halfMoveParity = startSide === "b" ? 1 : 0;
+
+	for (let i = firstMoveIdx; i < moveHistory.length; i++) {
 		const move = moveHistory[i];
+		const isWhiteHalfMove = halfMoveParity === 0;
 
-		if (i % 2 === 0) {
+		if (isWhiteHalfMove) {
+			// Move number before White's turn
 			const numberSpan = document.createElement("span");
 			numberSpan.className = "move-number";
-			numberSpan.textContent = `${currentNumber}.`;
+			numberSpan.textContent = `${currentMoveNumber}.`;
 			historyDiv.appendChild(numberSpan);
-			currentNumber++;
+		} else if (i === firstMoveIdx && startSide === "b") {
+			// Black's very first move after a Black-to-move FEN: show "N. …"
+			const numberSpan = document.createElement("span");
+			numberSpan.className = "move-number";
+			numberSpan.textContent = `${currentMoveNumber}. \u2026`;
+			historyDiv.appendChild(numberSpan);
 		}
 
 		const moveBtn = document.createElement("button");
 		moveBtn.className = "move-item";
 		moveBtn.type = "button";
 		moveBtn.textContent = move.san || move.uci;
+		// dataset.plyIndex matches the index in the full store moveHistory array
 		moveBtn.dataset.plyIndex = String(i);
 		moveBtn.dataset.moveUci = move.uci;
 		moveBtn.addEventListener("click", () => {
@@ -234,6 +267,12 @@ const updateMoveHistory = (moveHistory) => {
 			sendToEngine("chess_browse_to_ply", { plyIndex: i });
 		});
 		historyDiv.appendChild(moveBtn);
+
+		// After each Black half-move, advance the full move number
+		if (!isWhiteHalfMove) {
+			currentMoveNumber++;
+		}
+		halfMoveParity = 1 - halfMoveParity;
 	}
 };
 
@@ -306,6 +345,15 @@ engine.addEventListener("message", ({ data }) => {
 				evalScore: telemetry?.score ?? null,
 				lastMoveUci: data.latestMoveUci ?? null,
 			});
+
+			// If engine sends moveHistory (e.g., when starting from custom FEN),
+			// set it directly in the store
+			if (Array.isArray(data.moveHistory)) {
+				store.dispatch({
+					type: Actions.SET_MOVE_HISTORY,
+					moveHistory: data.moveHistory,
+				});
+			}
 
 			// Only real game redraws are allowed to mutate move history.
 			if (
@@ -414,9 +462,11 @@ store.subscribe((state) => {
 	updateMoveHistory(state.moveHistory);
 
 	// Highlight selected ply AFTER move history is updated
+	// Match by dataset.plyIndex (= store moveHistory index), not DOM order,
+	// so the FEN-start banner (which is not a .move-item) doesn't skew the index.
 	if (state.uiMode === "browse" && state.selectedPlyIndex != null) {
-		document.querySelectorAll(".move-item").forEach((item, idx) => {
-			if (idx === state.selectedPlyIndex) {
+		document.querySelectorAll(".move-item").forEach((item) => {
+			if (parseInt(item.dataset.plyIndex, 10) === state.selectedPlyIndex) {
 				item.classList.add("selected");
 			} else {
 				item.classList.remove("selected");
@@ -618,8 +668,20 @@ const wireUI = () => {
 		try {
 			createPositionFromFen(fen);
 			if (fenStatus) fenStatus.textContent = "";
-			// Start fresh from custom FEN with no move history
-			sendToEngine("chess_start", { fen, moveHistory: [] });
+			// Exit browse mode if currently browsing history
+			if (store.getState().uiMode === "browse") {
+				store.dispatch({ type: Actions.EXIT_BROWSE_MODE });
+			}
+			// Clear game state and start fresh from custom FEN
+			store.dispatch({ type: Actions.NEW_GAME });
+			// Resume game from the new FEN, respecting OPTIONS settings for AI/difficulty
+			const settings = readSettings();
+			sendToEngine("chess_start", {
+				fen,
+				moveHistory: [],
+				settings,
+				startFromCustomFen: true,
+			});
 		} catch (err) {
 			if (fenStatus) fenStatus.textContent = `Invalid FEN: ${err.message}`;
 		}
