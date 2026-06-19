@@ -54,7 +54,7 @@ body {
 	color: var(--color-text);
 	font-family: var(--font-ui);
 	font-size: 16px;
-	overflow: hidden;
+	overflow-y: auto;
 }
 
 a {
@@ -76,7 +76,7 @@ ul {
 #app {
 	display: flex;
 	flex-direction: column;
-	height: 100dvh; /* dynamic viewport height */
+	min-height: 100dvh; /* dynamic viewport height */
 }
 
 /* ---- header ---- */
@@ -119,7 +119,6 @@ ul {
 
 #app-content {
 	flex: 1;
-	overflow-y: auto;
 	position: relative;
 }
 
@@ -138,7 +137,7 @@ ul {
 	display: grid;
 	grid-template-columns: 1fr 360px;
 	grid-template-rows: 1fr;
-	height: 100%;
+	height: auto;
 	padding: 8px;
 	gap: 8px;
 	align-items: stretch;
@@ -156,7 +155,6 @@ ul {
 .game-panel {
 	display: flex;
 	flex-direction: column;
-	overflow: hidden;
 }
 
 .board-panel {
@@ -176,7 +174,6 @@ ul {
 	display: flex;
 	flex-direction: column;
 	gap: 8px;
-	overflow-y: auto;
 }
 
 /* ── Game info cards (FEN, telemetry, history) ─────────────────────────────── */
@@ -228,19 +225,6 @@ details.game-card:not([open]) .card-header {
 	display: flex;
 	flex-direction: column;
 	gap: 8px;
-	overflow-y: auto;
-	flex: 1;
-	min-height: 0;
-}
-
-#history-content {
-	overflow-y: auto;
-	min-height: 0;
-	scrollbar-gutter: stable;
-}
-
-#history-card[open] #history-content {
-	max-height: clamp(8rem, 30vh, 14rem);
 }
 
 /* Move history ──────────────────────────────────────────────────────────────── */
@@ -251,37 +235,6 @@ details.game-card:not([open]) .card-header {
 	gap: 6px;
 	font-size: 0.85rem;
 	align-content: flex-start;
-	padding-right: 2px;
-}
-
-#history-content {
-	scrollbar-width: thin;
-	scrollbar-color: var(--color-border) transparent;
-}
-
-#history-content::-webkit-scrollbar {
-	width: 10px;
-}
-
-#history-content::-webkit-scrollbar-track {
-	background: transparent;
-}
-
-#history-content::-webkit-scrollbar-thumb {
-	background-color: var(--color-border);
-	border-radius: 999px;
-	border: 2px solid transparent;
-	background-clip: content-box;
-}
-
-#history-content::-webkit-scrollbar-thumb:hover {
-	background-color: var(--color-text-dim);
-}
-
-@media (max-width: 900px) {
-	#history-card[open] #history-content {
-		max-height: clamp(7rem, 26vh, 10rem);
-	}
 }
 
 .move-item {

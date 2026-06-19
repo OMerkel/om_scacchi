@@ -37,12 +37,10 @@
         <div id="board"></div>
       </div>
       <div id="game-info-panel" class="game-panel info-panel">
-        <details id="fen-card" class="game-card" open>
-          <summary class="card-header">FEN</summary>
-          <div class="card-content">
-            <input type="text" id="fen-input" aria-label="FEN notation" autocomplete="off" spellcheck="false" placeholder="Paste FEN here…" />
-            <button id="btn-fen-apply" type="button" class="btn btn-sm">Apply</button>
-            <span id="fen-status" class="fen-status" aria-live="polite"></span>
+        <details id="history-card" class="game-card" open>
+          <summary class="card-header">History</summary>
+          <div class="card-content" id="history-content">
+          <div id="move-history" class="move-history"></div>
           </div>
         </details>
         <details id="telemetry-card" class="game-card" open>
@@ -64,10 +62,12 @@
             </dl>
           </div>
         </details>
-        <details id="history-card" class="game-card" open>
-          <summary class="card-header">History</summary>
-          <div class="card-content" id="history-content">
-            <div id="move-history" class="move-history"></div>
+        <details id="fen-card" class="game-card" open>
+          <summary class="card-header">FEN</summary>
+          <div class="card-content">
+          <input type="text" id="fen-input" aria-label="FEN notation" autocomplete="off" spellcheck="false" placeholder="Paste FEN here…" />
+          <button id="btn-fen-apply" type="button" class="btn btn-sm">Apply</button>
+          <span id="fen-status" class="fen-status" aria-live="polite"></span>
           </div>
         </details>
       </div>
