@@ -4,6 +4,7 @@
 //
 
 import { createChessRenderer } from "./chess/chess_renderer.js";
+import { generateLegalMoves } from "./chess/move_generator.js";
 import { createPositionFromFen } from "./chess/position.js";
 import { pvToSan } from "./chess/san.js";
 import { loadStorage, saveStorage } from "./chess/storage.js";
@@ -39,6 +40,7 @@ const updateDifficultyBadge = (
 	difficultySouth,
 	difficultyNorth,
 	resolvedDeviceProfile,
+	uiMode,
 ) => {
 	const badge = document.getElementById("app-header-badge");
 	if (!badge) return;
@@ -51,7 +53,8 @@ const updateDifficultyBadge = (
 			? "human"
 			: (difficultyNorth ?? "Medium");
 	const profile = resolvedDeviceProfile ?? "Desktop";
-	badge.textContent = `W ${south} | B ${north} | ${profile}`;
+	const mode = uiMode === "browse" ? "browse" : "game";
+	badge.textContent = `W ${south} | B ${north} | ${profile} | ${mode}`;
 };
 
 const detectAutoDeviceProfile = () => {
@@ -276,6 +279,18 @@ const updateMoveHistory = (moveHistory) => {
 	}
 };
 
+const canResumeFromBrowse = (state) => {
+	if (state.uiMode !== "browse") return false;
+	if (state.chessStatus?.terminal === true) return false;
+	if (!state.chessPosition) return false;
+
+	try {
+		return generateLegalMoves(state.chessPosition).length > 0;
+	} catch {
+		return false;
+	}
+};
+
 const handleChessSquareClick = (square) => {
 	const state = store.getState();
 	if (state.phase !== "human_turn") return;
@@ -426,6 +441,7 @@ store.subscribe((state) => {
 		state.settings.difficultySouth,
 		state.settings.difficultyNorth,
 		state.settings.resolvedDeviceProfile,
+		state.uiMode,
 	);
 
 	// Persist game state (FEN and move history)
@@ -435,6 +451,10 @@ store.subscribe((state) => {
 	const resumeItem = document.getElementById("nav-resume-item");
 	if (resumeItem) {
 		resumeItem.hidden = state.uiMode !== "browse";
+	}
+	const resumeButton = document.getElementById("nav-resume");
+	if (resumeButton) {
+		resumeButton.disabled = !canResumeFromBrowse(state);
 	}
 
 	// Cancel any pending AI move when entering browse mode
@@ -585,6 +605,9 @@ const wireUI = () => {
 
 	document.getElementById("nav-resume")?.addEventListener("click", () => {
 		const state = store.getState();
+		if (!canResumeFromBrowse(state)) {
+			return;
+		}
 		// Apply current Options settings before resuming
 		applySettingsFromOptions();
 		// Truncate move history to selected ply (delete all unplayed moves after cursor)
@@ -633,6 +656,10 @@ const wireUI = () => {
 
 	const saved = loadStorage();
 	applySettingsToOptionsForm(normalizeStoredSettings(saved.settings));
+	const restoredMoveHistory = Array.isArray(saved.moveHistory)
+		? saved.moveHistory
+		: [];
+	const shouldStartPaused = restoredMoveHistory.length > 0;
 
 	const initialSettings = readSettings();
 	store.dispatch({
@@ -649,8 +676,8 @@ const wireUI = () => {
 	});
 
 	// Restore move history from saved game state
-	if (Array.isArray(saved.moveHistory) && saved.moveHistory.length > 0) {
-		for (const move of saved.moveHistory) {
+	if (restoredMoveHistory.length > 0) {
+		for (const move of restoredMoveHistory) {
 			store.dispatch({
 				type: Actions.CHESS_MOVE_ADDED,
 				move,
@@ -658,6 +685,13 @@ const wireUI = () => {
 		}
 	}
 	recreateRenderer();
+
+	if (shouldStartPaused) {
+		store.dispatch({
+			type: Actions.ENTER_BROWSE_MODE,
+			plyIndex: restoredMoveHistory.length - 1,
+		});
+	}
 
 	const fenInput = document.getElementById("fen-input");
 	const fenApply = document.getElementById("btn-fen-apply");
@@ -708,7 +742,8 @@ const wireUI = () => {
 	// Restore game with saved FEN and move history
 	sendToEngine("chess_start", {
 		fen: saved.chessFen || undefined,
-		moveHistory: saved.moveHistory || [],
+		moveHistory: restoredMoveHistory,
+		startPaused: shouldStartPaused,
 	});
 };
 

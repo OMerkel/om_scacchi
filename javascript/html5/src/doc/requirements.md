@@ -138,7 +138,7 @@ Each requirement is assigned a unique identifier in the format `<CATEGORY>-<NUMB
 | FR-OPT-05 | The Options view shall display a live hint showing the current resolved value of the **Auto** device profile setting, updating on selection change and window resize. |
 | FR-OPT-06 | Options shall allow selecting the chess-set visual theme: **Glyph** (Unicode) or **Nice SVG**. |
 | FR-OPT-07 | Changing the chess-set theme shall immediately recreate the board renderer with the new theme. |
-| FR-OPT-08 | Options hint text shall state that changes take effect immediately on AI turns and on new games. |
+| FR-OPT-08 | Options hint text shall state that changes take effect immediately on AI turns and on new games. Applying options while returning to gameplay shall immediately synchronize worker-side settings for the current position. |
 | FR-OPT-09 | All option selections shall persist across page reloads via `localStorage`. |
 
 ---
@@ -152,10 +152,11 @@ Each requirement is assigned a unique identifier in the format `<CATEGORY>-<NUMB
 | FR-GAME-03 | On an AI player's turn, the AI shall execute its move automatically after a short delay (≈ 600 ms). |
 | FR-GAME-04 | The header title shall display `"AI thinking…"` while the AI is computing a move. |
 | FR-GAME-05 | The application shall support **browse mode**: clicking a move in the History panel navigates the board to that position without altering the game state. |
-| FR-GAME-06 | In browse mode, a **Resume** button shall appear in the side panel. Clicking Resume shall truncate the move history to the selected ply and continue the game from that position, respecting the current Options settings. |
-| FR-GAME-07 | Entering browse mode shall cancel any pending AI move timer. |
-| FR-GAME-08 | The game shall detect and announce terminal conditions: checkmate, stalemate, 50-move draw, threefold-repetition draw, and insufficient-material draw. |
-| FR-GAME-09 | The header badge shall permanently display the current White player type / difficulty, Black player type / difficulty, and resolved device profile in the format W [type] \| B [type] \| [profile]. |
+| FR-GAME-06 | In browse mode, a **Resume** button shall appear in the side panel. Resume shall only be enabled when the selected browse position is non-terminal and the active side has at least one legal move. If Resume is disabled, activating it shall have no effect and the application shall remain in browse mode. |
+| FR-GAME-07 | Clicking an enabled Resume shall truncate the move history to the selected ply and continue the game from that position, respecting the current Options settings. |
+| FR-GAME-08 | Entering browse mode shall cancel any pending AI move timer. |
+| FR-GAME-09 | The game shall detect and announce terminal conditions: checkmate, stalemate, 50-move draw, threefold-repetition draw, and insufficient-material draw. |
+| FR-GAME-10 | The header badge shall permanently display the current White player type / difficulty, Black player type / difficulty, resolved device profile, and UI mode (`game` or `browse`) in the format W [type] \| B [type] \| [profile] \| [mode]. |
 
 ---
 
@@ -165,7 +166,9 @@ Each requirement is assigned a unique identifier in the format `<CATEGORY>-<NUMB
 | --- | --- |
 | FR-PERS-01 | The current board position (FEN), move history, and all Options settings shall be saved to `localStorage` automatically after every state change. |
 | FR-PERS-02 | On page load, the last saved game state shall be restored: the board shall be set to the saved FEN, move history replayed to the store, and Options controls populated from saved settings. |
-| FR-PERS-03 | Persistence failures (private browsing, storage quota exceeded, etc.) shall be silently ignored; the application shall continue to function without stored state. |
+| FR-PERS-03 | If restored move history is non-empty, startup shall enter browse mode at the latest history ply (last move selected/highlighted) and shall not autoplay AI even when AI would otherwise be the next side to move. |
+| FR-PERS-04 | If no persisted move history exists, startup shall begin a fresh game-state flow (no browse mode, no Resume visibility) using configured/default player settings. |
+| FR-PERS-05 | Persistence failures (private browsing, storage quota exceeded, etc.) shall be silently ignored; the application shall continue to function without stored state. |
 
 ---
 

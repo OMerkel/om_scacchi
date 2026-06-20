@@ -139,9 +139,16 @@ Then open <http://localhost:4173>.
 - AI device profile: Auto, Desktop, Mobile
 - Chess set theme: Glyph, Nice SVG
 
-The header badge reflects current setup, for example:
+The header badge reflects current setup and UI mode, for example:
 
-`W Hard | B human | Desktop`
+`W Hard | B human | Desktop | browse`
+
+### Startup and Resume behavior
+
+- If persisted move history exists, startup restores the saved game in paused browse mode with the last move highlighted.
+- In that paused restore state, AI autoplay is suppressed until Resume.
+- Resume is enabled only when the selected browse position is non-terminal and has at least one legal move for the active side.
+- If no persisted move history exists, startup proceeds as a fresh game flow (no browse mode, no Resume item shown).
 
 ## Engine Notes
 

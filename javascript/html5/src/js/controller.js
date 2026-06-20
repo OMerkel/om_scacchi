@@ -268,6 +268,7 @@ self.addEventListener("message", async ({ data }) => {
 				typeof data.gameSessionId === "number"
 					? data.gameSessionId
 					: gameSessionId;
+			const startPaused = data.startPaused === true;
 			applySettings(data.settings);
 			persistentTt.clear();
 			chessPosition = data.fen
@@ -295,12 +296,30 @@ self.addEventListener("message", async ({ data }) => {
 				moveHistory = [{ type: "fen-start", fen: data.fen }, ...moveHistory];
 				startedFromCustomFen = true;
 			}
+			const latestMoveUciOnStart = [...moveHistory]
+				.reverse()
+				.find((entry) => typeof entry === "string" && entry.length > 0) ?? null;
 			const status = getGameStatus(chessPosition);
 			postChess("chess_redraw", {
 				status,
+				latestMoveUci: latestMoveUciOnStart,
+				...(startPaused && { isBrowseRedraw: true }),
 				...(startedFromCustomFen && { moveHistory }),
 			});
 
+			if (status.terminal || startPaused) break;
+
+			if (isChessAiTurn()) {
+				postChess("chess_ai_to_move", { status });
+			} else {
+				postChessHumanToMove(status);
+			}
+			break;
+		}
+
+		case "sync": {
+			applySettings(data.settings);
+			const status = getGameStatus(chessPosition);
 			if (status.terminal) break;
 
 			if (isChessAiTurn()) {

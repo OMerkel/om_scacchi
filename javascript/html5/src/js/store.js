@@ -49,7 +49,6 @@ export const Actions = Object.freeze({
 	CHESS_MOVE_ADDED: "CHESS_MOVE_ADDED",
 	ENTER_BROWSE_MODE: "ENTER_BROWSE_MODE",
 	EXIT_BROWSE_MODE: "EXIT_BROWSE_MODE",
-	SET_SELECTED_PLY: "SET_SELECTED_PLY",
 	TRUNCATE_MOVE_HISTORY: "TRUNCATE_MOVE_HISTORY",
 	SET_MOVE_HISTORY: "SET_MOVE_HISTORY",
 });
@@ -167,12 +166,6 @@ export const appReducer = (state, action) => {
 				...state,
 				uiMode: "game",
 				selectedPlyIndex: null,
-			};
-
-		case Actions.SET_SELECTED_PLY:
-			return {
-				...state,
-				selectedPlyIndex: action.plyIndex,
 			};
 
 		case Actions.TRUNCATE_MOVE_HISTORY:

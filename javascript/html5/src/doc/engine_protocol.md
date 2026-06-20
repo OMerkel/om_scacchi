@@ -43,8 +43,12 @@ Payload:
 {
   class: "request",
   request: "chess_start",
+  gameSessionId?: number,
   settings: Settings,
-  fen?: string
+  fen?: string,
+  moveHistory?: Array<string | { moveNumber?: number, san?: string, uci?: string }>,
+  startFromCustomFen?: boolean,
+  startPaused?: boolean
 }
 ```
 
@@ -54,6 +58,8 @@ Worker behavior summary:
 - attempts `createPositionFromFen(fen)` if provided
 - on parse failure, falls back to initial position
 - posts `chess_redraw`
+- includes `latestMoveUci` from restored move history when available
+- when `startPaused === true`, marks redraw as browse redraw and does not emit next-turn events
 - posts either `chess_human_to_move` or `chess_ai_to_move` when non-terminal
 
 ### 2.2 `chess_move`
@@ -124,6 +130,73 @@ Worker behavior summary:
 - no-op if current side-to-move is AI
 - otherwise rewinds history and emits redraw/human-turn
 
+### 2.5 `chess_browse_to_ply`
+
+Purpose:
+
+- reconstruct position by replaying move history up to selected ply for browse mode
+
+Payload:
+
+```js
+{
+  class: "request",
+  request: "chess_browse_to_ply",
+  settings: Settings,
+  plyIndex: number
+}
+```
+
+Worker behavior summary:
+
+- validates ply index against move history
+- replays history (supports custom FEN marker at history index 0)
+- emits `chess_redraw` with `isBrowseRedraw: true`
+
+### 2.6 `chess_continue_from_browse`
+
+Purpose:
+
+- continue gameplay from selected browse ply
+
+Payload:
+
+```js
+{
+  class: "request",
+  request: "chess_continue_from_browse",
+  settings: Settings,
+  plyIndex: number
+}
+```
+
+Worker behavior summary:
+
+- truncates worker histories to selected ply
+- reconstructs current position by replay
+- emits redraw and next-turn event when non-terminal
+
+### 2.7 `sync`
+
+Purpose:
+
+- apply options immediately to current live position and emit appropriate next-turn event
+
+Payload:
+
+```js
+{
+  class: "request",
+  request: "sync",
+  settings: Settings
+}
+```
+
+Worker behavior summary:
+
+- applies settings
+- if non-terminal, emits `chess_ai_to_move` or `chess_human_to_move` according to active side and player type
+
 ## 3. Worker -> UI Events
 
 ### 3.1 `chess_redraw`
@@ -138,12 +211,16 @@ Payload:
 {
   class: "request",
   request: "chess_redraw",
+  gameSessionId: number,
   chessPosition: Position,
   fen: string,
   status: GameStatus,
+  openingName?: string | null,
   latestMoveUci?: string,
   engineInfo?: EngineInfo,
-  info?: "illegal_move"
+  moveHistory?: Array<{ moveNumber?: number, san?: string, uci?: string } | { type: "fen-start", fen: string }>,
+  isBrowseRedraw?: boolean,
+  info?: "illegal_move" | "invalid_ply" | "move_not_found"
 }
 ```
 
@@ -254,17 +331,17 @@ The worker validates move equality by these fields:
 Current worker mapping by difficulty:
 
 - Easy:
-  - depth: 2
-  - maxNodes: 80_000
-  - maxTimeMs: 220
+  - depth: 3
+  - maxNodes: 150_000
+  - maxTimeMs: 400
 - Medium:
-  - depth: 4
-  - maxNodes: 500_000
-  - maxTimeMs: 900
+  - depth: 6
+  - maxNodes: 1_200_000
+  - maxTimeMs: 1_600
 - Hard:
-  - depth: 7
-  - maxNodes: 1_800_000
-  - maxTimeMs: 2_800
+  - depth: 10
+  - maxNodes: 3_500_000
+  - maxTimeMs: 5_000
 
 Soft/hard time windows are derived from `maxTimeMs` and per-difficulty overhead.
 

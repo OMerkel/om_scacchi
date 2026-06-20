@@ -109,6 +109,15 @@ describe("hmi browse freeze", () => {
 		vi.doMock("../../js/chess/position.js", () => ({
 			createPositionFromFen: vi.fn(() => ({ sideToMove: "w" })),
 		}));
+		vi.doMock("../../js/chess/move_generator.js", () => ({
+			generateLegalMoves: vi.fn(() => [
+				{
+					from: { row: 6, col: 4 },
+					to: { row: 4, col: 4 },
+					flags: {},
+				},
+			]),
+		}));
 		vi.doMock("../../js/chess/san.js", () => ({
 			pvToSan: vi.fn(() => "san"),
 		}));
@@ -140,10 +149,13 @@ describe("hmi browse freeze", () => {
 
 		const moveItems = () => Array.from(document.querySelectorAll(".move-item"));
 		expect(moveItems().length).toBe(2);
+		expect(document.getElementById("nav-resume-item")?.hidden).toBe(false);
 
-		const firstMoveBtn = moveItems()[0];
-		firstMoveBtn.click();
-		await flush();
+		const selectedAtStart = Array.from(
+			document.querySelectorAll(".move-item.selected"),
+		);
+		expect(selectedAtStart).toHaveLength(1);
+		expect(selectedAtStart[0]?.dataset.plyIndex).toBe("1");
 
 		const sentBeforeAiToMove = worker.sent.length;
 		worker.emit({
@@ -185,5 +197,84 @@ describe("hmi browse freeze", () => {
 		const afterLabels = moveItems().map((el) => el.textContent);
 		expect(afterLabels).toEqual(beforeLabels);
 		expect(moveItems().length).toBe(2);
+	});
+
+	it("blocks Resume on terminal restored game and stays in browse", async () => {
+		await import("../../js/hmi.js");
+		await flush();
+
+		const worker = MockWorker.instance;
+		expect(worker).toBeTruthy();
+
+		worker.emit({
+			request: "chess_redraw",
+			gameSessionId: 1,
+			isBrowseRedraw: true,
+			chessPosition: { sideToMove: "w" },
+			fen: "terminal-fen",
+			status: { terminal: true, reason: "checkmate", winner: "w" },
+			latestMoveUci: "e7e5",
+		});
+		await flush();
+		expect(document.getElementById("nav-resume")?.disabled).toBe(true);
+
+		const beforeResumeCount = worker.sent.length;
+		document.getElementById("nav-resume")?.click();
+		await flush();
+
+		const resumeMessages = worker.sent.slice(beforeResumeCount);
+		expect(resumeMessages).toHaveLength(0);
+	});
+
+	it("allows Resume only when legal moves exist for active player", async () => {
+		const moveGenerator = await import("../../js/chess/move_generator.js");
+		moveGenerator.generateLegalMoves.mockReturnValueOnce([]);
+
+		await import("../../js/hmi.js");
+		await flush();
+
+		const worker = MockWorker.instance;
+		expect(worker).toBeTruthy();
+
+		worker.emit({
+			request: "chess_redraw",
+			gameSessionId: 1,
+			isBrowseRedraw: true,
+			chessPosition: { sideToMove: "w" },
+			fen: "locked-fen",
+			status: { terminal: false },
+			latestMoveUci: "e7e5",
+		});
+		await flush();
+
+		expect(document.getElementById("nav-resume")?.disabled).toBe(true);
+		const beforeBlockedResume = worker.sent.length;
+		document.getElementById("nav-resume")?.click();
+		await flush();
+		expect(worker.sent.slice(beforeBlockedResume)).toHaveLength(0);
+
+		moveGenerator.generateLegalMoves.mockReturnValueOnce([
+			{ from: { row: 6, col: 4 }, to: { row: 4, col: 4 }, flags: {} },
+		]);
+		worker.emit({
+			request: "chess_redraw",
+			gameSessionId: 1,
+			isBrowseRedraw: true,
+			chessPosition: { sideToMove: "w" },
+			fen: "playable-fen",
+			status: { terminal: false },
+			latestMoveUci: "e7e5",
+		});
+		await flush();
+
+		expect(document.getElementById("nav-resume")?.disabled).toBe(false);
+		const beforeAllowedResume = worker.sent.length;
+		document.getElementById("nav-resume")?.click();
+		await flush();
+
+		const resumeMessages = worker.sent.slice(beforeAllowedResume);
+		expect(
+			resumeMessages.some((msg) => msg.request === "chess_continue_from_browse"),
+		).toBe(true);
 	});
 });

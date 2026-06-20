@@ -61,7 +61,7 @@ flowchart LR
 ### 4.1 UI and Navigation
 
 - Main views: `game`, `rules`, `options`, `about`.
-- Side panel commands include new game and undo.
+- Side panel commands include New Game and Resume (visible during browse mode).
 - Cards rendered in game view:
   - board,
   - FEN input/apply,
@@ -129,9 +129,12 @@ See also: `doc/engine_protocol.md` for the field-level protocol reference.
 Requests sent from UI to worker:
 
 - `chess_start` (`fen` optional)
+- `sync` (apply settings immediately on current position)
 - `chess_move` (`action` move object)
 - `chess_action_by_ai`
 - `chess_undo`
+- `chess_browse_to_ply`
+- `chess_continue_from_browse`
 
 Events emitted from worker to UI:
 

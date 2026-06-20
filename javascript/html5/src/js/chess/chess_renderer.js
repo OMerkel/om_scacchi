@@ -15,8 +15,8 @@ const BAR_W = 18;
 const BAR_X = 2;
 const RANK_LABEL_W = 26;
 const BOARD_OFFSET_X = BAR_X + BAR_W + 6 + RANK_LABEL_W; // 52
-const STATUS_H = 56;
-const BOARD_OFFSET_Y = STATUS_H;
+const BOARD_OFFSET_Y = 2;
+const STATUS_Y = 790;
 const BOARD_SIZE = CELL * 8; // 720
 
 // Colours
@@ -128,7 +128,7 @@ export const createChessRenderer = (container, onSquareClick, theme = null) => {
 	// ── Status text ──────────────────────────────────────────────────────────
 	const statusText = svgEl("text", {
 		x: BOARD_OFFSET_X + BOARD_SIZE / 2,
-		y: 38,
+		y: STATUS_Y,
 		"text-anchor": "middle",
 		style: "font:700 26px/1 system-ui,sans-serif;fill:#e2e8f0;",
 	});

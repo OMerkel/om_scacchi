@@ -138,7 +138,7 @@ ul {
 	grid-template-columns: 1fr 360px;
 	grid-template-rows: 1fr;
 	height: auto;
-	padding: 8px;
+	padding: 2px 8px 8px;
 	gap: 8px;
 	align-items: stretch;
 	max-width: none;
