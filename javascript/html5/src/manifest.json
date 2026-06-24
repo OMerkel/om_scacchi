@@ -1,6 +1,6 @@
 {
-	"name": "om_scacchi",
-	"short_name": "om_scacchi",
+	"name": "om scacchi",
+	"short_name": "scacchi",
 	"description": "om_scacchi - browser chess game with MCTS/UCT and alpha-beta AI",
 	"start_url": "./index.html",
 	"display": "standalone",
